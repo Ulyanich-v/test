@@ -96,6 +96,21 @@ exports.push([module.i, "", ""]);
 
 /***/ }),
 
+/***/ "../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/Input/style.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/ProgressBar/style.styl":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10395,6 +10410,7 @@ var map = {
 	"./view/components/Header/index.tsx": "./shared/view/components/Header/index.tsx",
 	"./view/elements/Button/index.tsx": "./shared/view/elements/Button/index.tsx",
 	"./view/elements/FormControl/index.tsx": "./shared/view/elements/FormControl/index.tsx",
+	"./view/elements/Input/index.tsx": "./shared/view/elements/Input/index.tsx",
 	"./view/elements/ProgressBar/index.tsx": "./shared/view/elements/ProgressBar/index.tsx",
 	"./view/elements/RadioBtn/index.tsx": "./shared/view/elements/RadioBtn/index.tsx",
 	"./view/elements/RadioGroup/index.tsx": "./shared/view/elements/RadioGroup/index.tsx",
@@ -10536,6 +10552,7 @@ class DomParser {
             radioInputs: [],
             questionText: '',
             progress: '',
+            logo: '',
             bannerText: '',
             form: {},
             buttons: [],
@@ -10566,6 +10583,7 @@ class DomParser {
         return this.jsonParseData;
     }
     setCommonFields() {
+        const $header = $(typesFormsFields_1.typesFields.header);
         const $form = $(typesFormsFields_1.typesFields.form);
         const $bannerText = $(typesFormsFields_1.typesFields.bannerText);
         const $questionText = $(typesFormsFields_1.typesFields.questionText);
@@ -10577,6 +10595,7 @@ class DomParser {
         this.jsonParseData.bannerText = $bannerText.children().text();
         this.jsonParseData.questionText = $questionText.text();
         this.jsonParseData.progress = $progress.text();
+        this.jsonParseData.logo = $header.find('img').attr('src');
         this.jsonParseData.buttons.push({ name: $prevButton.attr('name'), value: $prevButton.val() });
         this.jsonParseData.buttons.push({ name: $nextButton.attr('name'), value: $nextButton.val() });
         $form.children().each((index, element) => {
@@ -10684,6 +10703,7 @@ const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
 const RadioGroup_1 = __webpack_require__("./shared/view/elements/RadioGroup/index.tsx");
 const FormControl_1 = __webpack_require__("./shared/view/elements/FormControl/index.tsx");
 const Button_1 = __webpack_require__("./shared/view/elements/Button/index.tsx");
+const Input_1 = __webpack_require__("./shared/view/elements/Input/index.tsx");
 const decko_1 = __webpack_require__("../node_modules/decko/decko.js");
 __webpack_require__("./shared/view/components/Card/style.styl");
 class Card extends React.Component {
@@ -10694,15 +10714,21 @@ class Card extends React.Component {
     render() {
         const b = this.b;
         const { initialData, formData, submitForm, changeFormField } = this.props;
-        return (React.createElement("form", { className: b() },
+        return (React.createElement("form", { ref: this.onRef, className: b(), action: initialData.form.action, method: initialData.form.method },
+            initialData.hiddenInputs.map((input) => {
+                return (React.createElement(Input_1.default, { type: "hidden", name: input.name, value: input.value }));
+            }),
             React.createElement("div", { className: b('content') },
                 React.createElement("div", { className: b('text') }, initialData.questionText),
                 React.createElement("div", { className: b('options') },
                     React.createElement(FormControl_1.default, null,
                         React.createElement(RadioGroup_1.default, { onClick: changeFormField, radioInputs: initialData.radioInputs }))),
                 React.createElement("div", { className: b('button-control') },
-                    React.createElement(Button_1.default, { label: "Назад", theme: "back", name: initialData.buttons[0].name, value: initialData.buttons[0].value, onClick: this.onBackClick }),
-                    React.createElement(Button_1.default, { label: "Далее", theme: "next", name: initialData.buttons[1].name, value: initialData.buttons[1].value, onClick: this.onNextClick })))));
+                    React.createElement(Button_1.default, { label: "Назад", theme: "back", name: initialData.buttons[0].name, value: initialData.buttons[0].value, onClick: this.onBackClick, type: "submit" }),
+                    React.createElement(Button_1.default, { label: "Далее", theme: "next", name: initialData.buttons[1].name, value: initialData.buttons[1].value, onClick: this.onNextClick, type: "submit" })))));
+    }
+    onRef(ref) {
+        this.setState({ formRef: ref });
     }
     onNextClick() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -10710,6 +10736,7 @@ class Card extends React.Component {
             const buttonName = initialData.buttons[1].name;
             const buttonValue = initialData.buttons[1].value;
             yield submitForm(__assign({}, formData, { [buttonName]: buttonValue }));
+            console.log(this.state.formRef);
             location.reload();
         });
     }
@@ -10723,6 +10750,9 @@ class Card extends React.Component {
         });
     }
 }
+__decorate([
+    decko_1.bind
+], Card.prototype, "onRef", null);
 __decorate([
     decko_1.bind
 ], Card.prototype, "onNextClick", null);
@@ -10815,13 +10845,6 @@ if(true) {
 
 /***/ }),
 
-/***/ "./shared/view/components/Header/images/logo.gif":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/logo.gif";
-
-/***/ }),
-
 /***/ "./shared/view/components/Header/index.tsx":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10830,7 +10853,6 @@ module.exports = __webpack_require__.p + "images/logo.gif";
 const React = __webpack_require__("../node_modules/react/react.js");
 const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
 const ProgressBar_1 = __webpack_require__("./shared/view/elements/ProgressBar/index.tsx");
-const logoImg = __webpack_require__("./shared/view/components/Header/images/logo.gif");
 __webpack_require__("./shared/view/components/Header/style.styl");
 class Header extends React.Component {
     constructor() {
@@ -10839,11 +10861,12 @@ class Header extends React.Component {
     }
     render() {
         const b = this.b;
+        const { logo, progress } = this.props;
         return (React.createElement("div", { className: b() },
             React.createElement("div", { className: b('logo-img') },
-                React.createElement("img", { src: logoImg })),
+                React.createElement("img", { src: logo })),
             React.createElement("div", { className: b('progress-bar') },
-                React.createElement(ProgressBar_1.default, { value: 80 })),
+                React.createElement(ProgressBar_1.default, { value: progress })),
             React.createElement("div", { style: { clear: 'both' } })));
     }
 }
@@ -10890,8 +10913,8 @@ const button_1 = __webpack_require__("../node_modules/react-toolbox/lib/button/i
 const styles = __webpack_require__("./shared/view/elements/Button/style.styl");
 class Button extends React.Component {
     render() {
-        const { onClick, label, disabled, theme } = this.props;
-        return (React.createElement(button_1.Button, { ripple: true, primary: theme === 'next', disabled: disabled, label: label, theme: styles, onClick: onClick }));
+        const { onClick, label, disabled, theme, type, name, value } = this.props;
+        return (React.createElement(button_1.Button, { ripple: true, primary: theme === 'next', disabled: disabled, label: label, theme: styles, onClick: onClick, type: type, name: name, value: value }));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -10969,6 +10992,71 @@ if(true) {
 	if(!content.locals) {
 		module.hot.accept("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/FormControl/style.styl", function() {
 			var newContent = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/FormControl/style.styl");
+			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./shared/view/elements/Input/index.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const React = __webpack_require__("../node_modules/react/react.js");
+const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const decko_1 = __webpack_require__("../node_modules/decko/decko.js");
+__webpack_require__("./shared/view/elements/Input/style.styl");
+class Input extends React.Component {
+    constructor(props) {
+        super(props);
+        this.b = block('input');
+    }
+    render() {
+        const b = this.b;
+        const { placeholder, name, type, value, disabled } = this.props;
+        return (React.createElement("input", { name: name, placeholder: placeholder, type: type, value: value || '', onChange: this.changeInput, disabled: disabled }));
+    }
+    changeInput(event) {
+        this.props.onChange(event.currentTarget.name, event.currentTarget.value);
+    }
+}
+__decorate([
+    decko_1.bind
+], Input.prototype, "changeInput", null);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Input;
+
+
+/***/ }),
+
+/***/ "./shared/view/elements/Input/style.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/Input/style.styl");
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/style-loader/addStyles.js")(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(true) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/Input/style.styl", function() {
+			var newContent = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/elements/Input/style.styl");
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
@@ -11211,6 +11299,7 @@ const typesFields = {
     progress: '.mrProgressText',
     radioElement: '.mrSingle',
     radioTitle: '.mrSingleText',
+    header: '#HeaderBox',
 };
 exports.typesFields = typesFields;
 const typesForms = {

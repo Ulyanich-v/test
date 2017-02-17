@@ -2627,24 +2627,39 @@ exports.App = App_1.default;
 
 const React = __webpack_require__("../node_modules/react/react.js");
 const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const react_redux_1 = __webpack_require__("../node_modules/react-redux/lib/index.js");
 const Footer_1 = __webpack_require__("./shared/view/components/Footer/index.tsx");
 const Header_1 = __webpack_require__("./shared/view/components/Header/index.tsx");
 const Polls_1 = __webpack_require__("./features/polls/view/Polls/Polls.tsx");
 __webpack_require__("./shared/view/styles/base.styl");
 __webpack_require__("./shared/view/styles/fonts/index.ts");
 __webpack_require__("./modules/App/view/styles.styl");
+function mapStateToProps(state) {
+    const { initialFormData: { logo, progress } } = state.polls;
+    return {
+        logo,
+        progress,
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {};
+}
 class App extends React.Component {
     render() {
         const b = block('application');
+        const { logo, progress } = this.props;
         return (React.createElement("div", { className: b() },
             React.createElement("div", { className: b('body') },
-                React.createElement(Header_1.default, null),
+                React.createElement(Header_1.default, { logo: logo, progress: progress }),
                 React.createElement(Polls_1.default, null),
                 React.createElement(Footer_1.default, null))));
     }
 }
+exports.App = App;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = App;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 /***/ }),
