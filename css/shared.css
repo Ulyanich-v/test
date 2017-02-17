@@ -1,0 +1,129 @@
+.footer {
+  padding-top: 70px;
+}
+.footer__description {
+  text-align: center;
+}
+.footer__copyright {
+  padding-top: 15px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.progress-bar__title {
+  font-size: 0.929rem;
+  line-height: 1rem;
+  margin-right: 12px;
+  color: #9f9f9f;
+  vertical-align: top;
+}
+.linear {
+  width: 324px;
+  height: 13px;
+  border-radius: 2px 0 0 2px;
+  background: #e0e0e0;
+}
+.buffer {
+  background: linear-gradient(to left, #534691 0%, #15a9af 100%);
+}
+.head__progress-bar {
+  padding-top: 40px;
+  float: right;
+}
+.head__logo-img {
+  display: inline-block;
+  padding-top: 20px;
+}
+.head__logo-img img {
+  width: 67px;
+  height: 60px;
+}
+.radio-button {
+  padding: 0 10px;
+  transition-duration: 0.4s;
+}
+.radio-button_active {
+  background-color: #daf1f2;
+  transition-property: background-color;
+}
+.text {
+  font-size: 1.14rem;
+  color: #5c5c5c;
+  padding-left: 10px;
+  line-height: 24px;
+}
+.radio,
+.radioChecked {
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+}
+.radio {
+  border: solid 2px #adb9ca;
+}
+.radioChecked {
+  border: 2px solid #15a9af;
+}
+.radioChecked:before {
+  background-color: #15a9af;
+}
+.field,
+.disabled {
+  padding: 0.95rem 0;
+  height: 18px;
+  margin: 0;
+  display: inline-block;
+}
+.radio:before,
+.radioChecked:before {
+  background-color: #15a9af;
+}
+.button {
+  margin: 0 10px;
+  padding: 0 24px;
+  font-size: 1rem;
+  line-height: 2.57rem;
+  height: 2.57rem;
+  background-color: #eee;
+  color: #747474;
+}
+.primary {
+  background-color: #15a9af;
+  color: #fff;
+}
+.primary:not([disabled]).flat {
+  color: #fff;
+}
+.primary:not([disabled]).flat:hover {
+  background-color: #44babf;
+}
+.neutral:not([disabled]).flat {
+  color: #747474;
+}
+.neutral:not([disabled]).flat:hover {
+  background-color: #f3f3f3;
+}
+.raised,
+.flat,
+.floating,
+.toggle {
+  font-family: 'SegoeUI', sans-serif;
+}
+.card {
+  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);
+  background-color: #fff;
+  border-radius: 2px;
+}
+.card__content {
+  padding: 65px 40px;
+}
+.card__text {
+  font-size: 1.42rem;
+  padding: 0 10px;
+}
+.card__button-control {
+  text-align: center;
+  padding-top: 36px;
+}
+.card__options {
+  padding-top: 40px;
+}
