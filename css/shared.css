@@ -108,22 +108,22 @@
 .toggle {
   font-family: 'SegoeUI', sans-serif;
 }
-.question {
+.card {
   box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);
   background-color: #fff;
   border-radius: 2px;
 }
-.question__content {
+.card__content {
   padding: 65px 40px;
 }
-.question__text {
+.card__text {
   font-size: 1.42rem;
   padding: 0 10px;
 }
-.question__button-control {
+.card__button-control {
   text-align: center;
   padding-top: 36px;
 }
-.question__options {
+.card__options {
   padding-top: 40px;
 }
