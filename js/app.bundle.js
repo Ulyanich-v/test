@@ -8,7 +8,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".application {\n  min-height: 100%;\n  background-color: #ececec;\n}\n.application__body {\n  max-width: 1600px;\n  width: 80%;\n  margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, ".application {\n  min-height: 100%;\n  background-color: #dedede;\n}\n.application__body {\n  max-width: 1600px;\n  width: 80%;\n  margin: 0 auto;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -26,7 +26,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "html {\n  font-size: 14px;\n  color: #272727;\n  background: #fff;\n  font-family: 'SegoeUI', sans-serif;\n}\nbody {\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n}\na {\n  color: #272727;\n  text-decoration: none;\n}\na:hover {\n  color: #171717;\n  text-decoration: none;\n}\na:focus {\n  color: #272727;\n  text-decoration: none;\n}\nhtml,\nbody,\n#root {\n  height: 100%;\n}\n@font-face {\n  font-family: SegoeUI;\n  font-style: normal;\n  src: url(" + __webpack_require__("./shared/view/styles/fonts/SegoeUI/SegoeUIRegular.ttf") + ");\n}\n", ""]);
+exports.push([module.i, "html {\n  font-size: 14px;\n  color: #272727;\n  background: #fff;\n  font-family: 'SegoeUI', sans-serif;\n}\nbody {\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\na {\n  color: #272727;\n  text-decoration: none;\n}\na:hover {\n  color: #171717;\n  text-decoration: none;\n}\na:focus {\n  color: #272727;\n  text-decoration: none;\n}\nhtml,\nbody,\n#root {\n  height: 100%;\n}\n@font-face {\n  font-family: SegoeUI;\n  font-style: normal;\n  src: url(" + __webpack_require__("./shared/view/styles/fonts/SegoeUI/SegoeUIRegular.ttf") + ");\n}\n", ""]);
 
 // exports
 
@@ -2433,10 +2433,41 @@ exports.Namespace = Namespace;
 
 "use strict";
 
-function loadInitialFormData(data) {
-    return { type: 'CATEGORY_SELECT:LOAD_CATEGORIES', payload: data };
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const helpers_1 = __webpack_require__("./shared/helpers/index.ts");
+function changeFormField(fieldName, fieldValue) {
+    return { type: 'POLLS:CHANGE_FORM_FIELD', payload: { fieldName, fieldValue } };
 }
-exports.loadInitialFormData = loadInitialFormData;
+exports.changeFormField = changeFormField;
+function submitForm(data) {
+    return (dispatch, getState, { api }) => __awaiter(this, void 0, void 0, function* () {
+        try {
+            const initialFormData = helpers_1.convertToFormData(getState().polls.initialFormData.hiddenInputs);
+            dispatch({ type: 'POLLS:SUBMIT_FORM', payload: null });
+            const formResponse = yield api.submitForm(__assign({}, initialFormData, data));
+            dispatch({ type: 'POLLS:SUBMIT_FORM_SUCCESS', payload: formResponse });
+        }
+        catch (ex) {
+            dispatch({ type: 'POLLS:SUBMIT_FORM_FAILED', payload: null });
+        }
+    });
+}
+exports.submitForm = submitForm;
 
 
 /***/ }),
@@ -2448,7 +2479,8 @@ exports.loadInitialFormData = loadInitialFormData;
 
 const communication_1 = __webpack_require__("./features/polls/redux/actions/communication.ts");
 const actions = {
-    loadInitialFormData: communication_1.loadInitialFormData,
+    changeFormField: communication_1.changeFormField,
+    submitForm: communication_1.submitForm,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = actions;
@@ -2495,8 +2527,14 @@ const immutable_1 = __webpack_require__("../node_modules/immutable/dist/immutabl
 function reducer(state = initial_1.default, { type, payload }) {
     const imState = immutable_1.fromJS(state);
     switch (type) {
-        case `POLLS:LOAD_INITIAL_FORM_DATA`:
+        case 'POLLS:LOAD_INITIAL_FORM_DATA':
             return imState.set('initialFormData', payload).toJS();
+        case 'POLLS:CHANGE_FORM_FIELD': {
+            const { fieldName, fieldValue } = payload;
+            return imState
+                .setIn(['formData', [fieldName]], fieldValue)
+                .toJS();
+        }
         default:
             return state;
     }
@@ -2517,35 +2555,28 @@ const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
 const react_redux_1 = __webpack_require__("../node_modules/react-redux/lib/index.js");
 const redux_1 = __webpack_require__("../node_modules/redux/es/index.js");
 const Card_1 = __webpack_require__("./shared/view/components/Card/index.tsx");
-// interface IOwnProps {
-//
-// }
-//
-// interface IStateProps {
-//
-// }
-//
-// interface IDispatchProps {
-//
-// }
-//
-// interface IProps extends IDispatchProps, IStateProps {
-//
-// }
+const redux_2 = __webpack_require__("./features/polls/redux/index.ts");
 function mapStateToProps(state) {
-    return {};
+    const { initialFormData, formData } = state.polls;
+    return {
+        initialFormData,
+        formData,
+    };
 }
 function mapDispatchToProps(dispatch) {
-    return redux_1.bindActionCreators({}, dispatch);
+    return redux_1.bindActionCreators({
+        submitForm: redux_2.actions.submitForm,
+        changeFormField: redux_2.actions.changeFormField,
+    }, dispatch);
 }
-class Polls extends React.PureComponent {
+class Polls extends React.Component {
     render() {
         const b = block('polls');
-        return (React.createElement(Card_1.default, null));
+        const { initialFormData, formData, submitForm, changeFormField } = this.props;
+        return (React.createElement(Card_1.default, { formData: formData, submitForm: submitForm, changeFormField: changeFormField, initialData: initialFormData }));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-// export { IProps };
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Polls);
 
 
@@ -2564,11 +2595,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const parser = new DomParser_1.DomParser();
     const htmlParseData = parser.parseFormData();
     const app = new createReactApp_1.default();
-    const div = document.createElement('div');
-    div.setAttribute('id', 'root');
-    document.body.appendChild(div);
-    app.render();
-    app.passFormDataInStore(htmlParseData);
+    const question = htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint' && item.value);
+    if (question.value === 'sa1') {
+        document.getElementById("mrForm").style.display = "none";
+        const div = document.createElement('div');
+        div.setAttribute('id', 'root');
+        document.body.appendChild(div);
+        app.passFormDataInStore(htmlParseData);
+        app.render();
+    }
 });
 
 

@@ -8,7 +8,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".card {\n  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);\n  background-color: #fff;\n  border-radius: 2px;\n}\n.card__content {\n  padding: 65px 40px;\n}\n.card__text {\n  font-size: 1.42rem;\n  padding: 0 10px;\n}\n.card__button-control {\n  text-align: center;\n  padding-top: 36px;\n}\n.card__options {\n  padding-top: 40px;\n}\n", ""]);
+exports.push([module.i, ".card {\n  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);\n  background-color: #fff;\n  border-radius: 2px;\n}\n.card__content {\n  padding: 65px;\n}\n.card__text {\n  font-size: 1.42rem;\n  padding: 0 10px;\n  color: rgba(0,0,0,0.87);\n}\n.card__button-control {\n  text-align: center;\n  padding-top: 36px;\n}\n.card__options {\n  padding-top: 30px;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -29,7 +29,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".footer {\n  padding-top: 70px;\n}\n.footer__description {\n  text-align: center;\n}\n.footer__copyright {\n  padding-top: 15px;\n  padding-bottom: 40px;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, ".footer {\n  padding-top: 70px;\n  color: rgba(0,0,0,0.7);\n}\n.footer__description {\n  text-align: center;\n}\n.footer__copyright {\n  padding-top: 15px;\n  padding-bottom: 40px;\n  text-align: center;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -66,7 +66,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".button {\n  margin: 0 10px;\n  padding: 0 24px;\n  font-size: 1rem;\n  line-height: 2.57rem;\n  height: 2.57rem;\n  background-color: #eee;\n  color: #747474;\n}\n.primary {\n  background-color: #15a9af;\n  color: #fff;\n}\n.primary:not([disabled]).flat {\n  color: #fff;\n}\n.primary:not([disabled]).flat:hover {\n  background-color: #44babf;\n}\n.neutral:not([disabled]).flat {\n  color: #747474;\n}\n.neutral:not([disabled]).flat:hover {\n  background-color: #f3f3f3;\n}\n.raised,\n.flat,\n.floating,\n.toggle {\n  font-family: 'SegoeUI', sans-serif;\n}\n", ""]);
+exports.push([module.i, ".button {\n  margin: 0 7px;\n  padding: 0 24px;\n  font-size: 1rem;\n  line-height: 2.57rem;\n  height: 2.57rem;\n  background-color: #f0f0f0;\n  color: rgba(0,0,0,0.7);\n}\n.primary {\n  background-color: #15a9af;\n  color: #fff;\n}\n.primary:not([disabled]).flat {\n  color: #fff;\n}\n.primary:not([disabled]).flat:hover {\n  background-color: #44babf;\n}\n.neutral:not([disabled]).flat {\n  color: rgba(0,0,0,0.7);\n}\n.neutral:not([disabled]).flat:hover {\n  background-color: #f3f3f3;\n}\n.raised,\n.flat,\n.floating,\n.toggle {\n  font-family: 'SegoeUI', sans-serif;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -104,7 +104,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".progress-bar__title {\n  font-size: 0.929rem;\n  line-height: 1rem;\n  margin-right: 12px;\n  color: #9f9f9f;\n  vertical-align: top;\n}\n.linear {\n  width: 324px;\n  height: 13px;\n  border-radius: 2px 0 0 2px;\n  background: #e0e0e0;\n}\n.buffer {\n  background: linear-gradient(to left, #534691 0%, #15a9af 100%);\n}\n", ""]);
+exports.push([module.i, ".progress-bar__title {\n  font-size: 0.929rem;\n  line-height: 1rem;\n  margin-right: 12px;\n  color: rgba(0,0,0,0.7);\n  vertical-align: top;\n}\n.linear {\n  width: 324px;\n  height: 13px;\n  border-radius: 2px 0 0 2px;\n  background: #f0f0f0;\n}\n.buffer {\n  background: linear-gradient(to left, #534691 0%, #15a9af 100%);\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -123,7 +123,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".radio-button {\n  padding: 0 10px;\n  transition-duration: 0.4s;\n}\n.radio-button_active {\n  background-color: #daf1f2;\n  transition-property: background-color;\n}\n.text {\n  font-size: 1.14rem;\n  color: #5c5c5c;\n  padding-left: 10px;\n  line-height: 24px;\n}\n.radio,\n.radioChecked {\n  background-color: #fff;\n  width: 20px;\n  height: 20px;\n}\n.radio {\n  border: solid 2px #adb9ca;\n}\n.radioChecked {\n  border: 2px solid #15a9af;\n}\n.radioChecked:before {\n  background-color: #15a9af;\n}\n.field,\n.disabled {\n  padding: 0.95rem 0;\n  height: 18px;\n  margin: 0;\n  display: inline-block;\n}\n.radio:before,\n.radioChecked:before {\n  background-color: #15a9af;\n}\n", ""]);
+exports.push([module.i, ".radio-button {\n  padding: 0 10px;\n}\n.radio-button:hover {\n  background-color: rgba(21,169,175,0.08);\n}\n.radio-button_active {\n  background-color: rgba(21,169,175,0.16);\n  transition-property: background-color;\n  transition-duration: 0.4s;\n}\n.radio-button_active:hover {\n  background-color: rgba(21,169,175,0.16);\n}\n.text {\n  font-size: 1.14rem;\n  color: rgba(0,0,0,0.87);\n  padding-left: 10px;\n  line-height: 24px;\n}\n.radio,\n.radioChecked {\n  background-color: #fff;\n  width: 20px;\n  height: 20px;\n}\n.radio {\n  border: solid 2px rgba(0,0,0,0.54);\n  box-sizing: border-box;\n}\n.radioChecked {\n  border: 2px solid #15a9af;\n  box-sizing: border-box;\n}\n.radioChecked:before {\n  background-color: #15a9af;\n}\n.field,\n.disabled {\n  padding: 0.95rem 0;\n  height: 18px;\n  margin: 0;\n  display: inline-block;\n}\n.radio:before,\n.radioChecked:before {\n  background-color: #15a9af;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -10385,6 +10385,7 @@ var map = {
 	"./api/Api.ts": "./shared/api/Api.ts",
 	"./api/HttpActions.ts": "./shared/api/HttpActions.ts",
 	"./helpers/DomParser.ts": "./shared/helpers/DomParser.ts",
+	"./helpers/index.ts": "./shared/helpers/index.ts",
 	"./index.ts": "./shared/index.ts",
 	"./types/app.ts": "./shared/types/app.ts",
 	"./types/forms.ts": "./shared/types/forms.ts",
@@ -10451,10 +10452,23 @@ class Api {
             return response.data;
         });
     }
+    submitForm(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = new URLSearchParams();
+            Object.keys(data).forEach((key) => {
+                params.append(key, data[key]);
+            });
+            const response = yield this.actions.post('http://staging01.ipsosinteractive.com/mrIWeb/mrIWeb.dll', params);
+            return response.data;
+        });
+    }
 }
 __decorate([
     decko_1.bind
 ], Api.prototype, "loadCategories", null);
+__decorate([
+    decko_1.bind
+], Api.prototype, "submitForm", null);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Api;
 
@@ -10524,6 +10538,7 @@ class DomParser {
             progress: '',
             bannerText: '',
             form: {},
+            buttons: [],
         };
     }
     parseFormData() {
@@ -10555,11 +10570,15 @@ class DomParser {
         const $bannerText = $(typesFormsFields_1.typesFields.bannerText);
         const $questionText = $(typesFormsFields_1.typesFields.questionText);
         const $progress = $(typesFormsFields_1.typesFields.progress);
+        const $nextButton = $(typesFormsFields_1.typesFields.nextButton);
+        const $prevButton = $(typesFormsFields_1.typesFields.prevButton);
         this.jsonParseData.form.action = $form.attr('action');
         this.jsonParseData.form.method = $form.attr('method');
         this.jsonParseData.bannerText = $bannerText.children().text();
         this.jsonParseData.questionText = $questionText.text();
         this.jsonParseData.progress = $progress.text();
+        this.jsonParseData.buttons.push({ name: $prevButton.attr('name'), value: $prevButton.val() });
+        this.jsonParseData.buttons.push({ name: $nextButton.attr('name'), value: $nextButton.val() });
         $form.children().each((index, element) => {
             if (element.tagName === 'INPUT') {
                 this.jsonParseData.hiddenInputs.push({
@@ -10571,6 +10590,23 @@ class DomParser {
     }
 }
 exports.DomParser = DomParser;
+
+
+/***/ }),
+
+/***/ "./shared/helpers/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function convertToFormData(data) {
+    const formData = {};
+    data.forEach((item) => {
+        formData[item.name] = item.value;
+    });
+    return formData;
+}
+exports.convertToFormData = convertToFormData;
 
 
 /***/ }),
@@ -10621,11 +10657,27 @@ exports.Module = Module;
 
 "use strict";
 
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
 const React = __webpack_require__("../node_modules/react/react.js");
 const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
@@ -10641,21 +10693,34 @@ class Card extends React.Component {
     }
     render() {
         const b = this.b;
+        const { initialData, formData, submitForm, changeFormField } = this.props;
         return (React.createElement("form", { className: b() },
             React.createElement("div", { className: b('content') },
-                React.createElement("div", { className: b('text') }, "SA1. \u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435! \u042D\u0442\u043E\u0442 \u043E\u043F\u0440\u043E\u0441 \u043F\u043E\u0434\u0433\u043E\u0442\u043E\u0432\u043B\u0435\u043D \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439 \u0441\u043E\u0446\u0438\u043E\u043B\u043E\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u043A\u043E\u043C\u043F\u0430\u043D\u0438\u0435\u0439 \u0418\u043F\u0441\u043E\u0441." + " " + "\u041C\u044B \u043F\u0440\u043E\u0432\u043E\u0434\u0438\u043C \u043E\u043F\u0440\u043E\u0441\u044B \u043D\u0430\u0441\u0435\u043B\u0435\u043D\u0438\u044F \u043D\u0430 \u0440\u0430\u0437\u043B\u0438\u0447\u043D\u044B\u0435 \u0442\u0435\u043C\u044B." + " " + "\u0411\u0443\u0434\u0435\u043C \u043E\u0447\u0435\u043D\u044C \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u044B, \u0435\u0441\u043B\u0438 \u0412\u044B \u0443\u0434\u0435\u043B\u0438\u0442\u0435 \u043D\u0435\u043C\u043D\u043E\u0433\u043E \u0441\u0432\u043E\u0435\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0438 \u043E\u0442\u0432\u0435\u0442\u0438\u0442\u0435 \u043D\u0430 \u043D\u0430\u0448\u0438 \u0432\u043E\u043F\u0440\u043E\u0441\u044B." + " " + "\u0412\u0441\u0435 \u0412\u0430\u0448\u0438 \u043E\u0442\u0432\u0435\u0442\u044B, \u0442\u0430\u043A \u0436\u0435 \u043A\u0430\u043A \u0438 \u043E\u0442\u0432\u0435\u0442\u044B \u0434\u0440\u0443\u0433\u0438\u0445 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u043E\u0432 \u044D\u0442\u043E\u0433\u043E \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F," + " " + "\u0431\u0443\u0434\u0443\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432 \u043E\u0431\u043E\u0431\u0449\u0435\u043D\u043D\u043E\u0439 \u0444\u043E\u0440\u043C\u0435 \u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u043E\u0441\u043B\u0435 \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438." + " " + "\u0417\u0430\u0440\u0430\u043D\u0435\u0435 \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0412\u0430\u0448\u0435 \u0443\u0447\u0430\u0441\u0442\u0438\u0435 \u0432 \u043E\u043F\u0440\u043E\u0441\u0435!"),
+                React.createElement("div", { className: b('text') }, initialData.questionText),
                 React.createElement("div", { className: b('options') },
                     React.createElement(FormControl_1.default, null,
-                        React.createElement(RadioGroup_1.default, { radioInputs: [{ label: 'Очень нравится' }, { label: 'Ни то ни другое' }, { label: 'Нравится' }] }))),
+                        React.createElement(RadioGroup_1.default, { onClick: changeFormField, radioInputs: initialData.radioInputs }))),
                 React.createElement("div", { className: b('button-control') },
-                    React.createElement(Button_1.default, { label: "Назад", theme: "back", onClick: this.onBackClick }),
-                    React.createElement(Button_1.default, { label: "Далее", theme: "next", onClick: this.onNextClick })))));
+                    React.createElement(Button_1.default, { label: "Назад", theme: "back", name: initialData.buttons[0].name, value: initialData.buttons[0].value, onClick: this.onBackClick }),
+                    React.createElement(Button_1.default, { label: "Далее", theme: "next", name: initialData.buttons[1].name, value: initialData.buttons[1].value, onClick: this.onNextClick })))));
     }
     onNextClick() {
-        console.log('next');
+        return __awaiter(this, void 0, void 0, function* () {
+            const { initialData, formData, submitForm } = this.props;
+            const buttonName = initialData.buttons[1].name;
+            const buttonValue = initialData.buttons[1].value;
+            yield submitForm(__assign({}, formData, { [buttonName]: buttonValue }));
+            location.reload();
+        });
     }
     onBackClick() {
-        console.log('back');
+        return __awaiter(this, void 0, void 0, function* () {
+            const { initialData, formData, submitForm } = this.props;
+            const buttonName = initialData.buttons[0].name;
+            const buttonValue = initialData.buttons[0].value;
+            yield submitForm(__assign({}, formData, { [buttonName]: buttonValue }));
+            location.reload();
+        });
     }
 }
 __decorate([
@@ -10826,7 +10891,7 @@ const styles = __webpack_require__("./shared/view/elements/Button/style.styl");
 class Button extends React.Component {
     render() {
         const { onClick, label, disabled, theme } = this.props;
-        return (React.createElement(button_1.Button, { ripple: true, primary: theme === 'next', disabled: disabled, label: label, theme: styles }));
+        return (React.createElement(button_1.Button, { ripple: true, primary: theme === 'next', disabled: disabled, label: label, theme: styles, onClick: onClick }));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -10985,9 +11050,9 @@ class RadioBtn extends React.Component {
     }
     render() {
         const b = this.b;
-        const { label, disabled, checked, value, onChange } = this.props;
+        const { label, disabled, checked, value, name, onChange } = this.props;
         return (React.createElement("div", { className: b({ active: checked }) },
-            React.createElement(radio_1.RadioButton, { theme: style_styl_1.default, disabled: disabled, label: label, checked: checked, value: value, onChange: onChange })));
+            React.createElement(radio_1.RadioButton, { name: name, theme: style_styl_1.default, disabled: disabled, label: label, checked: checked, value: value, onChange: onChange })));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -11050,10 +11115,11 @@ class RadioGroup extends React.Component {
         const b = this.b;
         const { radioInputs } = this.props;
         return (React.createElement("div", { className: b() }, radioInputs.map((input, index) => {
-            return (React.createElement(RadioBtn_1.default, { key: index, label: input.label, checked: this.state.value === index.toString(), value: index, onChange: this.handleChange }));
+            return (React.createElement(RadioBtn_1.default, { key: index, label: input.text, name: input.name, checked: this.state.value === input.value, value: input.value, onChange: this.handleChange }));
         })));
     }
     handleChange(event) {
+        this.props.onClick(event.currentTarget.name, event.currentTarget.value);
         this.setState({ value: event.currentTarget.value });
     }
     ;
@@ -11135,6 +11201,8 @@ exports.default = null;
 
 const typesFields = {
     typeForm: 'input[name*=SavePoint]',
+    nextButton: 'input[name=_NNext]',
+    prevButton: 'input[name=_NPrev]',
     form: '#mrForm',
     bannerText: '.mrBannerText',
     questionTable: '.mrQuestionTable',
