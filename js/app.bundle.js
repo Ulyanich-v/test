@@ -2565,7 +2565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const question = htmlParseData && htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint');
     if (question && question.value === 'sa1') {
         const form = document.getElementById('mrForm');
-        if (form && form.style && form.style.display) {
+        if (form && form.style) {
             form.style.display = 'none';
         }
         const div = document.createElement('div');
