@@ -10468,23 +10468,10 @@ class Api {
             return response.data;
         });
     }
-    submitForm(data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const params = new URLSearchParams();
-            Object.keys(data).forEach((key) => {
-                params.append(key, data[key]);
-            });
-            const response = yield this.actions.post('http://staging01.ipsosinteractive.com/mrIWeb/mrIWeb.dll', params);
-            return response.data;
-        });
-    }
 }
 __decorate([
     decko_1.bind
 ], Api.prototype, "loadCategories", null);
-__decorate([
-    decko_1.bind
-], Api.prototype, "submitForm", null);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Api;
 
@@ -10551,7 +10538,7 @@ class DomParser {
             hiddenInputs: [],
             radioInputs: [],
             questionText: '',
-            progress: '',
+            progress: 0,
             logo: '',
             bannerText: '',
             form: {},
@@ -10594,7 +10581,7 @@ class DomParser {
         this.jsonParseData.form.method = $form.attr('method');
         this.jsonParseData.bannerText = $bannerText.children().text();
         this.jsonParseData.questionText = $questionText.text();
-        this.jsonParseData.progress = $progress.text();
+        this.jsonParseData.progress = parseInt($progress.text(), 10);
         this.jsonParseData.logo = $header.find('img').attr('src');
         this.jsonParseData.buttons.push({ name: $prevButton.attr('name'), value: $prevButton.val() });
         this.jsonParseData.buttons.push({ name: $nextButton.attr('name'), value: $nextButton.val() });
@@ -10682,14 +10669,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 const React = __webpack_require__("../node_modules/react/react.js");
 const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
 const RadioGroup_1 = __webpack_require__("./shared/view/elements/RadioGroup/index.tsx");
@@ -10705,10 +10684,10 @@ class Card extends React.Component {
     }
     render() {
         const b = this.b;
-        const { initialData, formData, submitForm, changeFormField } = this.props;
+        const { initialData, changeFormField } = this.props;
         return (React.createElement("form", { ref: this.onRef, className: b(), action: initialData.form.action, method: initialData.form.method },
             initialData.hiddenInputs.map((input) => {
-                return (React.createElement(Input_1.default, { type: "hidden", name: input.name, value: input.value }));
+                return (React.createElement(Input_1.default, { key: input.name, type: "hidden", name: input.name, value: input.value }));
             }),
             React.createElement("div", { className: b('content') },
                 React.createElement("div", { className: b('text') }, initialData.questionText),
@@ -10716,41 +10695,16 @@ class Card extends React.Component {
                     React.createElement(FormControl_1.default, null,
                         React.createElement(RadioGroup_1.default, { onClick: changeFormField, radioInputs: initialData.radioInputs }))),
                 React.createElement("div", { className: b('button-control') },
-                    React.createElement(Button_1.default, { label: "Назад", theme: "back", name: initialData.buttons[0].name, value: initialData.buttons[0].value, onClick: this.onBackClick, type: "submit" }),
-                    React.createElement(Button_1.default, { label: "Далее", theme: "next", name: initialData.buttons[1].name, value: initialData.buttons[1].value, onClick: this.onNextClick, type: "submit" })))));
+                    React.createElement(Button_1.default, { label: "Назад", theme: "back", name: initialData.buttons[0].name, value: initialData.buttons[0].value, type: "submit" }),
+                    React.createElement(Button_1.default, { label: "Далее", theme: "next", name: initialData.buttons[1].name, value: initialData.buttons[1].value, type: "submit" })))));
     }
     onRef(ref) {
         this.setState({ formRef: ref });
-    }
-    onNextClick() {
-        return __awaiter(this, void 0, void 0, function* () {
-            // const { initialData, formData, submitForm } = this.props;
-            // const buttonName = initialData.buttons[1].name;
-            // const buttonValue = initialData.buttons[1].value;
-            // await submitForm({ ...formData, ...{ [buttonName]:  buttonValue } });
-            // console.log(this.state.formRef);
-            // location.reload();
-        });
-    }
-    onBackClick() {
-        return __awaiter(this, void 0, void 0, function* () {
-            // const { initialData, formData, submitForm } = this.props;
-            // const buttonName = initialData.buttons[0].name;
-            // const buttonValue = initialData.buttons[0].value;
-            // await submitForm({ ...formData, ...{ [buttonName]:  buttonValue } });
-            // location.reload();
-        });
     }
 }
 __decorate([
     decko_1.bind
 ], Card.prototype, "onRef", null);
-__decorate([
-    decko_1.bind
-], Card.prototype, "onNextClick", null);
-__decorate([
-    decko_1.bind
-], Card.prototype, "onBackClick", null);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Card;
 
@@ -11020,7 +10974,10 @@ class Input extends React.Component {
         return (React.createElement("input", { name: name, placeholder: placeholder, type: type, value: value || '', onChange: this.changeInput, disabled: disabled }));
     }
     changeInput(event) {
-        this.props.onChange(event.currentTarget.name, event.currentTarget.value);
+        const { onChange } = this.props;
+        if (onChange) {
+            onChange(event.currentTarget.name, event.currentTarget.value);
+        }
     }
 }
 __decorate([

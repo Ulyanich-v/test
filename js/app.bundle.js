@@ -2433,41 +2433,10 @@ exports.Namespace = Namespace;
 
 "use strict";
 
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-const helpers_1 = __webpack_require__("./shared/helpers/index.ts");
 function changeFormField(fieldName, fieldValue) {
     return { type: 'POLLS:CHANGE_FORM_FIELD', payload: { fieldName, fieldValue } };
 }
 exports.changeFormField = changeFormField;
-function submitForm(data) {
-    return (dispatch, getState, { api }) => __awaiter(this, void 0, void 0, function* () {
-        try {
-            const initialFormData = helpers_1.convertToFormData(getState().polls.initialFormData.hiddenInputs);
-            dispatch({ type: 'POLLS:SUBMIT_FORM', payload: null });
-            const formResponse = yield api.submitForm(__assign({}, initialFormData, data));
-            dispatch({ type: 'POLLS:SUBMIT_FORM_SUCCESS', payload: formResponse });
-        }
-        catch (ex) {
-            dispatch({ type: 'POLLS:SUBMIT_FORM_FAILED', payload: null });
-        }
-    });
-}
-exports.submitForm = submitForm;
 
 
 /***/ }),
@@ -2480,7 +2449,6 @@ exports.submitForm = submitForm;
 const communication_1 = __webpack_require__("./features/polls/redux/actions/communication.ts");
 const actions = {
     changeFormField: communication_1.changeFormField,
-    submitForm: communication_1.submitForm,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = actions;
@@ -2565,15 +2533,14 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return redux_1.bindActionCreators({
-        submitForm: redux_2.actions.submitForm,
         changeFormField: redux_2.actions.changeFormField,
     }, dispatch);
 }
 class Polls extends React.Component {
     render() {
         const b = block('polls');
-        const { initialFormData, formData, submitForm, changeFormField } = this.props;
-        return (React.createElement(Card_1.default, { formData: formData, submitForm: submitForm, changeFormField: changeFormField, initialData: initialFormData }));
+        const { initialFormData, formData, changeFormField } = this.props;
+        return (React.createElement(Card_1.default, { formData: formData, changeFormField: changeFormField, initialData: initialFormData }));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -2595,9 +2562,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const parser = new DomParser_1.DomParser();
     const htmlParseData = parser.parseFormData();
     const app = new createReactApp_1.default();
-    const question = htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint' && item.value);
-    if (question.value === 'sa1') {
-        document.getElementById("mrForm").style.display = "none";
+    const question = htmlParseData && htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint');
+    if (question && question.value === 'sa1') {
+        const form = document.getElementById('mrForm');
+        if (form && form.style && form.style.display) {
+            form.style.display = 'none';
+        }
         const div = document.createElement('div');
         div.setAttribute('id', 'root');
         document.body.appendChild(div);
@@ -2656,8 +2626,6 @@ class App extends React.Component {
     }
 }
 exports.App = App;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = App;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(App);
 
