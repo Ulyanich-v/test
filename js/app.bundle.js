@@ -1,2 +1,2794 @@
-webpackJsonp([1],{154:function(e,n,t){"use strict";function r(e,n){for(var t in n){var r=n[t];r.configurable=r.enumerable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,t,r)}return e}function o(e){if(Array.isArray(e)){for(var n=0,t=Array(e.length);n<e.length;n++)t[n]=e[n];return t}return Array.from(e)}function a(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}function u(e){return("*"===e?b.wildcard:l.is.array(e)?b.array:l.is.stringableFunc(e)?b.default:l.is.func(e)?b.predicate:b.default)(e)}function i(e,n,t){function r(e){a(),t(e,!0)}function o(e){u.push(e),e.cont=function(o,a){c||((0,l.remove)(u,e),e.cont=l.noop,a?r(o):(e===n&&(i=o),u.length||(c=!0,t(i))))}}function a(){c||(c=!0,u.forEach(function(e){e.cont=l.noop,e.cancel()}),u=[])}var u=[],i=void 0,c=!1;return o(n),{addTask:o,cancelAll:a,abort:r,getTasks:function(){return u},taskNames:function(){return u.map(function(e){return e.name})}}}function c(e){var n=e.context,t=e.fn,r=e.args;if(l.is.iterator(t))return t;var o=void 0,a=void 0;try{o=t.apply(n,r)}catch(e){a=e}return l.is.iterator(o)?o:a?(0,l.makeIterator)(function(){throw a}):(0,l.makeIterator)(function(){var e=void 0,n={done:!1,value:o},t=function(e){return{done:!0,value:e}};return function(r){return e?t(r):(e=!0,n)}}())}function f(e){function n(){Y.isRunning&&!Y.isCancelled&&(Y.isCancelled=!0,b(g))}function t(){e._isRunning&&!e._isCancelled&&(e._isCancelled=!0,Z.cancelAll(),E(g))}function b(n,t){if(!Y.isRunning)throw new Error("Trying to resume an already finished generator");try{var r=void 0;t?r=e.throw(n):n===g?(Y.isCancelled=!0,b.cancel(),r=l.is.func(e.return)?e.return(g):{done:!0,value:g}):r=n===y?l.is.func(e.return)?e.return():{done:!0}:e.next(n),r.done?(Y.isMainRunning=!1,Y.cont&&Y.cont(r.value)):k(r.value,K,"",b)}catch(e){Y.isCancelled&&z("error","uncaught at "+G,e.message),Y.isMainRunning=!1,Y.cont(e,!0)}}function E(n,t){e._isRunning=!1,Q.close(),t?(n instanceof Error&&(n.sagaStack="at "+G+" \n "+(n.sagaStack||n.stack)),X.cont||(z("error","uncaught",n.sagaStack||n.stack),n instanceof Error&&W&&W(n)),e._error=n,e._isAborted=!0,e._deferredEnd&&e._deferredEnd.reject(n)):(n===g&&l.isDev&&z("info",G+" has been cancelled",""),e._result=n,e._deferredEnd&&e._deferredEnd.resolve(n)),X.cont&&X.cont(n,t),X.joiners.forEach(function(e){return e.cb(n,t)}),X.joiners=null}function k(e,n){function t(e,n){u||(u=!0,o.cancel=l.noop,V&&(n?V.effectRejected(a,e):V.effectResolved(a,e)),o(e,n))}var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"",o=arguments[3],a=(0,l.uid)();V&&V.effectTriggered({effectId:a,parentEffectId:n,label:r,effect:e});var u=void 0;t.cancel=l.noop,o.cancel=function(){if(!u){u=!0;try{t.cancel()}catch(e){z("error","uncaught at "+G,e.message)}t.cancel=l.noop,V&&V.effectCancelled(a)}};var i=void 0;return l.is.promise(e)?O(e,t):l.is.helper(e)?C(m(e),a,t):l.is.iterator(e)?_(e,a,G,t):l.is.array(e)?N(e,a,t):l.is.notUndef(i=d.asEffect.take(e))?w(i,t):l.is.notUndef(i=d.asEffect.put(e))?j(i,t):l.is.notUndef(i=d.asEffect.race(e))?R(i,a,t):l.is.notUndef(i=d.asEffect.call(e))?A(i,a,t):l.is.notUndef(i=d.asEffect.cps(e))?P(i,t):l.is.notUndef(i=d.asEffect.fork(e))?C(i,a,t):l.is.notUndef(i=d.asEffect.join(e))?T(i,t):l.is.notUndef(i=d.asEffect.cancel(e))?S(i,t):l.is.notUndef(i=d.asEffect.select(e))?D(i,t):l.is.notUndef(i=d.asEffect.actionChannel(e))?L(i,t):l.is.notUndef(i=d.asEffect.flush(e))?M(i,t):l.is.notUndef(i=d.asEffect.cancelled(e))?I(i,t):t(e)}function O(e,n){var t=e[l.CANCEL];"function"==typeof t&&(n.cancel=t),e.then(n,function(e){return n(e,!0)})}function _(e,n,t,r){f(e,x,U,H,q,n,t,r)}function w(e,n){var t=e.channel,r=e.pattern,o=e.maybe;t=t||Q;var a=function(e){return e instanceof Error?n(e,!0):n((0,p.isEnd)(e)&&!o?y:e)};try{t.take(a,u(r))}catch(e){return n(e,!0)}n.cancel=a.cancel}function j(e,n){var t=e.channel,r=e.action,o=e.resolve;(0,s.asap)(function(){var e=void 0;try{e=(t?t.put:U)(r)}catch(e){if(t||o)return n(e,!0);z("error","uncaught at "+G,e.stack||e.message||e)}return o&&l.is.promise(e)?void O(e,n):n(e)})}function A(e,n,t){var r=e.context,o=e.fn,a=e.args,u=void 0;try{u=o.apply(r,a)}catch(e){return t(e,!0)}return l.is.promise(u)?O(u,t):l.is.iterator(u)?_(u,n,o.name,t):t(u)}function P(e,n){var t=e.context,r=e.fn,o=e.args;try{!function(){var e=function(e,t){return l.is.undef(e)?n(t):n(e,!0)};r.apply(t,o.concat(e)),e.cancel&&(n.cancel=function(){return e.cancel()})}()}catch(e){return n(e,!0)}}function C(e,n,t){var r=e.context,o=e.fn,a=e.args,u=e.detached,i=c({context:r,fn:o,args:a});try{(0,s.suspend)();var d=f(i,x,U,H,q,n,o.name,u?null:l.noop);u?t(d):i._isRunning?(Z.addTask(d),t(d)):i._error?Z.abort(i._error):t(d)}finally{(0,s.flush)()}}function T(e,n){e.isRunning()?!function(){var t={task:X,cb:n};n.cancel=function(){return(0,l.remove)(e.joiners,t)},e.joiners.push(t)}():e.isAborted()?n(e.error(),!0):n(e.result())}function S(e,n){e.isRunning()&&e.cancel(),n()}function N(e,n,t){function r(){o===u.length&&(a=!0,t(u))}if(!e.length)return t([]);var o=0,a=void 0,u=Array(e.length),i=e.map(function(e,n){var i=function(e,i){a||(i||(0,p.isEnd)(e)||e===y||e===g?(t.cancel(),t(e,i)):(u[n]=e,o++,r()))};return i.cancel=l.noop,i});t.cancel=function(){a||(a=!0,i.forEach(function(e){return e.cancel()}))},e.forEach(function(e,t){return k(e,n,t,i[t])})}function R(e,n,t){var r=void 0,o=Object.keys(e),u={};o.forEach(function(e){var n=function(n,o){r||(o?(t.cancel(),t(n,!0)):(0,p.isEnd)(n)||n===y||n===g||(t.cancel(),r=!0,t(a({},e,n))))};n.cancel=l.noop,u[e]=n}),t.cancel=function(){r||(r=!0,o.forEach(function(e){return u[e].cancel()}))},o.forEach(function(t){r||k(e[t],n,t,u[t])})}function D(e,n){var t=e.selector,r=e.args;try{var a=t.apply(void 0,[H()].concat(o(r)));n(a)}catch(e){n(e,!0)}}function L(e,n){var t=e.pattern,r=e.buffer,o=u(t);o.pattern=t,n((0,p.eventChannel)(x,r||v.buffers.fixed(),o))}function I(e,n){n(!!Y.isCancelled)}function M(e,n){e.flush(n)}function F(e,n,o,u){var i,c,f;return o._deferredEnd=null,c={},a(c,l.TASK,!0),a(c,"id",e),a(c,"name",n),i="done",f={},f[i]=f[i]||{},f[i].get=function(){if(o._deferredEnd)return o._deferredEnd.promise;var e=(0,l.deferred)();return o._deferredEnd=e,o._isRunning||(o._error?e.reject(o._error):e.resolve(o._result)),e.promise},a(c,"cont",u),a(c,"joiners",[]),a(c,"cancel",t),a(c,"isRunning",function(){return o._isRunning}),a(c,"isCancelled",function(){return o._isCancelled}),a(c,"isAborted",function(){return o._isAborted}),a(c,"result",function(){return o._result}),a(c,"error",function(){return o._error}),r(c,f),c}var x=arguments.length>1&&void 0!==arguments[1]?arguments[1]:function(){return l.noop},U=arguments.length>2&&void 0!==arguments[2]?arguments[2]:l.noop,H=arguments.length>3&&void 0!==arguments[3]?arguments[3]:l.noop,q=arguments.length>4&&void 0!==arguments[4]?arguments[4]:{},K=arguments.length>5&&void 0!==arguments[5]?arguments[5]:0,G=arguments.length>6&&void 0!==arguments[6]?arguments[6]:"anonymous",B=arguments[7];(0,l.check)(e,l.is.iterator,h);var V=q.sagaMonitor,J=q.logger,W=q.onError,z=J||l.log,Q=(0,p.stdChannel)(x);b.cancel=l.noop;var X=F(K,G,e,B),Y={name:G,cancel:n,isRunning:!0},Z=i(G,Y,E);return B&&(B.cancel=t),e._isRunning=!0,b(),X}Object.defineProperty(n,"__esModule",{value:!0}),n.TASK_CANCEL=n.CHANNEL_END=n.NOT_ITERATOR_ERROR=void 0,n.default=f;var l=t(33),s=t(299),d=t(97),p=t(96),v=t(95),h=n.NOT_ITERATOR_ERROR="proc first argument (Saga function result) must be an iterator",y=n.CHANNEL_END={toString:function(){return"@@redux-saga/CHANNEL_END"}},g=n.TASK_CANCEL={toString:function(){return"@@redux-saga/TASK_CANCEL"}},b={wildcard:function(){return l.kTrue},default:function(e){return function(n){return n.type===String(e)}},array:function(e){return function(n){return e.some(function(e){return u(e)(n)})}},predicate:function(e){return function(n){return e(n)}}},m=function(e){return{fn:e}}},166:function(e,n,t){"use strict";var r={initialFormData:{}};Object.defineProperty(n,"__esModule",{value:!0}),n.default=r},167:function(e,n,t){"use strict";var r=t(329);n.reducer=r.default;var o=t(328);n.actions=o.default;var a=t(166);n.initial=a.default},168:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function o(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!=typeof n&&"function"!=typeof n?e:n}function a(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+typeof n);e.prototype=Object.create(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(Object.setPrototypeOf?Object.setPrototypeOf(e,n):e.__proto__=n)}function u(e){var n=e.polls.initialFormData;return{initialFormData:n}}function i(e){return d.bindActionCreators({changeFormField:g.actions.changeFormField},e)}var c=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),f=t(0),l=t(12),s=t(72),d=t(74),p=t(174),v=t(182),h=t(330),y=t(331),g=t(167),b=function(e){function n(){return r(this,n),o(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return a(n,e),c(n,[{key:"render",value:function(){var e=(l("polls"),this.props.initialFormData);return f.createElement(p.Tabs,{activeKey:e.typeForm},f.createElement(p.Tab,{eventKey:v.typesForms.sa1},f.createElement(y.default,{initialData:e})),f.createElement(p.Tab,{eventKey:v.typesForms.ma1},f.createElement(h.default,{initialData:e})))}}]),n}(f.Component);Object.defineProperty(n,"__esModule",{value:!0}),n.default=s.connect(u,i)(b)},298:function(e,n,t){"use strict";function r(e,n){function t(n,t){if(a===v)return p;if(t)throw a=v,t;o&&o(n);var r=e[a](),u=c(r,3),i=u[0],f=u[1],l=u[2];return a=i,o=l,a===v?p:f}var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"iterator",o=void 0,a=n;return(0,l.makeIterator)(t,function(e){return t(null,e)},r,!0)}function o(e){return l.is.channel(e)?"channel":Array.isArray(e)?String(e.map(function(e){return String(e)})):String(e)}function a(e,n){for(var t=arguments.length,a=Array(t>2?t-2:0),u=2;u<t;u++)a[u-2]=arguments[u];var i={done:!1,value:(0,s.take)(e)},c=function(e){return{done:!1,value:s.fork.apply(void 0,[n].concat(a,[e]))}},l=void 0,d=function(e){return l=e};return r({q1:function(){return["q2",i,d]},q2:function(){return l===f.END?[v]:["q1",c(l)]}},"q1","takeEvery("+o(e)+", "+n.name+")")}function u(e,n){for(var t=arguments.length,a=Array(t>2?t-2:0),u=2;u<t;u++)a[u-2]=arguments[u];var i={done:!1,value:(0,s.take)(e)},c=function(e){return{done:!1,value:s.fork.apply(void 0,[n].concat(a,[e]))}},l=function(e){return{done:!1,value:(0,s.cancel)(e)}},d=void 0,p=void 0,h=function(e){return d=e},y=function(e){return p=e};return r({q1:function(){return["q2",i,y]},q2:function(){return p===f.END?[v]:d?["q3",l(d)]:["q1",c(p),h]},q3:function(){return["q1",c(p),h]}},"q1","takeLatest("+o(e)+", "+n.name+")")}function i(e,n,t){for(var a=arguments.length,u=Array(a>3?a-3:0),i=3;i<a;i++)u[i-3]=arguments[i];var c=void 0,p=void 0,h={done:!1,value:(0,s.actionChannel)(n,d.buffers.sliding(1))},y=function(){return{done:!1,value:(0,s.take)(p,n)}},g=function(e){return{done:!1,value:s.fork.apply(void 0,[t].concat(u,[e]))}},b={done:!1,value:(0,s.call)(l.delay,e)},m=function(e){return c=e},E=function(e){return p=e};return r({q1:function(){return["q2",h,E]},q2:function(){return["q3",y(),m]},q3:function(){return c===f.END?[v]:["q4",g(c)]},q4:function(){return["q2",b]}},"q1","throttle("+o(n)+", "+t.name+")")}Object.defineProperty(n,"__esModule",{value:!0}),n.throttle=n.takeLatest=n.takeEvery=void 0;var c=function(){function e(e,n){var t=[],r=!0,o=!1,a=void 0;try{for(var u,i=e[Symbol.iterator]();!(r=(u=i.next()).done)&&(t.push(u.value),!n||t.length!==n);r=!0);}catch(e){o=!0,a=e}finally{try{!r&&i.return&&i.return()}finally{if(o)throw a}}return t}return function(n,t){if(Array.isArray(n))return n;if(Symbol.iterator in Object(n))return e(n,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();n.takeEveryHelper=a,n.takeLatestHelper=u,n.throttleHelper=i;var f=t(96),l=t(33),s=t(97),d=t(95),p={done:!0,value:void 0},v={},h=function(e){return"import "+e+" from 'redux-saga' has been deprecated in favor of import "+e+" from 'redux-saga/effects'.\nThe latter will not work with yield*, as helper effects are wrapped automatically for you in fork effect.\nTherefore yield "+e+" will return task descriptor to your saga and execute next lines of code."};n.takeEvery=(0,l.deprecate)(a,h("takeEvery")),n.takeLatest=(0,l.deprecate)(u,h("takeLatest")),n.throttle=(0,l.deprecate)(i,h("throttle"))},299:function(e,n,t){"use strict";function r(e){try{a(),e()}finally{u()}}function o(e){c?i.push(e):r(e)}function a(){c++}function u(){c--,!c&&i.length&&r(i.shift())}Object.defineProperty(n,"__esModule",{value:!0}),n.asap=o,n.suspend=a,n.flush=u;var i=[],c=0},303:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}var o=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),a=t(0),u=t(23),i=t(72),c=t(324),f=t(332),l=t(169),s=function(){function e(){r(this,e);var n=new l.default("/api"),t=c.default(n),o=t.store;t.runSaga;this.store=o,this.rootComponent=a.createElement(i.Provider,{store:o},a.createElement(f.App,null))}return o(e,[{key:"render",value:function(){u.render(this.rootComponent,document.getElementById("root"))}},{key:"passFormDataInStore",value:function(e){this.store.dispatch({type:"POLLS:LOAD_INITIAL_FORM_DATA",payload:e})}}]),e}();Object.defineProperty(n,"__esModule",{value:!0}),n.default=s},324:function(e,n,t){"use strict";function r(e){var n=u.default(),t={api:e},r=[n,a.default.withExtraArgument(t)],c=o.combineReducers({polls:i.reducer}),f=o.createStore(c,o.compose(o.applyMiddleware.apply(o,r),function(e){return e}));return{store:f,runSaga:n.run}}var o=t(74),a=t(160),u=t(621),i=t(325);Object.defineProperty(n,"__esModule",{value:!0}),n.default=r},325:function(e,n,t){"use strict";var r=t(168);n.Polls=r.default;var o=t(167);n.reducer=o.reducer,n.actions=o.actions,n.initialState=o.initial;var a=t(326);n.Namespace=a},326:function(e,n,t){"use strict"},327:function(e,n,t){"use strict";function r(e,n){return{type:"POLLS:CHANGE_FORM_FIELD",payload:{fieldName:e,fieldValue:n}}}n.changeFormField=r},328:function(e,n,t){"use strict";var r=t(327),o={changeFormField:r.changeFormField};Object.defineProperty(n,"__esModule",{value:!0}),n.default=o},329:function(e,n,t){"use strict";function r(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:o.default,n=arguments[1],t=n.type,r=n.payload,u=a.fromJS(e);switch(t){case"POLLS:LOAD_INITIAL_FORM_DATA":return u.set("initialFormData",r).toJS();case"POLLS:CHANGE_FORM_FIELD":var i=r.fieldName,c=r.fieldValue;return u.setIn(["formData",[i]],c).toJS();default:return e}}var o=t(166),a=t(159);Object.defineProperty(n,"__esModule",{value:!0}),n.default=r},33:function(e,n,t){"use strict";function r(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}function o(e,n,t){if(!n(e))throw p("error","uncaught at check",t),new Error(t)}function a(e,n){return A.notUndef(e)&&j.call(e,n)}function u(e,n){var t=e.indexOf(n);t>=0&&e.splice(t,1)}function i(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n=y({},e),t=new Promise(function(e,t){n.resolve=e,n.reject=t});return n.promise=t,n}function c(e){for(var n=[],t=0;t<e;t++)n.push(i());return n}function f(e){var n=!(arguments.length>1&&void 0!==arguments[1])||arguments[1],t=void 0,r=new Promise(function(r){t=setTimeout(function(){return r(n)},e)});return r[k]=function(){return clearTimeout(t)},r}function l(){var e,n=!0,t=void 0,o=void 0;return e={},r(e,m,!0),r(e,"isRunning",function(){return n}),r(e,"result",function(){return t}),r(e,"error",function(){return o}),r(e,"setRunning",function(e){return n=e}),r(e,"setResult",function(e){return t=e}),r(e,"setError",function(e){return o=e}),e}function s(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0;return function(){return++e}}function d(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:P,t=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"",r=arguments[3],o={name:t,next:e,throw:n,return:C};return r&&(o[E]=!0),"undefined"!=typeof Symbol&&(o[Symbol.iterator]=function(){return o}),o}function p(e,n){var t=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"";"undefined"==typeof window?console.log("redux-saga "+e+": "+n+"\n"+(t&&t.stack||t)):console[e](n,t)}function v(e,n){return function(){return w&&p("warn",n),e.apply(void 0,arguments)}}function h(e){return function(n){var t=Object.defineProperty(n,O,{value:!0});return e(t)}}Object.defineProperty(n,"__esModule",{value:!0});var y=Object.assign||function(e){for(var n=1;n<arguments.length;n++){var t=arguments[n];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e},g="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};n.check=o,n.hasOwn=a,n.remove=u,n.deferred=i,n.arrayOfDeffered=c,n.delay=f,n.createMockTask=l,n.autoInc=s,n.makeIterator=d,n.log=p,n.deprecate=v,n.wrapSagaDispatch=h;var b=n.sym=function(e){return"@@redux-saga/"+e},m=n.TASK=b("TASK"),E=n.HELPER=b("HELPER"),k=(n.MATCH=b("MATCH"),n.CANCEL=b("cancelPromise")),O=n.SAGA_ACTION=b("SAGA_ACTION"),_=n.konst=function(e){return function(){return e}},w=(n.kTrue=_(!0),n.kFalse=_(!1),n.noop=function(){},n.ident=function(e){return e},n.isDev=!1),j=Object.prototype.hasOwnProperty,A=n.is={undef:function(e){return null===e||void 0===e},notUndef:function(e){return null!==e&&void 0!==e},func:function(e){return"function"==typeof e},number:function(e){return"number"==typeof e},array:Array.isArray,promise:function(e){return e&&A.func(e.then)},iterator:function(e){return e&&A.func(e.next)&&A.func(e.throw)},task:function(e){return e&&e[m]},observable:function(e){return e&&A.func(e.subscribe)},buffer:function(e){return e&&A.func(e.isEmpty)&&A.func(e.take)&&A.func(e.put)},pattern:function(e){return e&&("string"==typeof e||"symbol"===("undefined"==typeof e?"undefined":g(e))||A.func(e)||A.array(e))},channel:function(e){return e&&A.func(e.take)&&A.func(e.close)},helper:function(e){return e&&e[E]},stringableFunc:function(e){return A.func(e)&&a(e,"toString")}},P=(n.uid=s(),function(e){throw e}),C=function(e){return{value:e,done:!0}};n.internalErr=function(e){return new Error("\n  redux-saga: Error checking hooks detected an inconsistent state. This is likely a bug\n  in redux-saga code and not yours. Thanks for reporting this in the project's github repo.\n  Error: "+e+"\n")}},330:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function o(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!=typeof n&&"function"!=typeof n?e:n}function a(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+typeof n);e.prototype=Object.create(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(Object.setPrototypeOf?Object.setPrototypeOf(e,n):e.__proto__=n)}var u=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),i=t(0),c=t(12),f=t(102),l=t(60);t(410);var s=function(e){function n(){r(this,n);var e=o(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments));return e.b=c("multiple-answer-card"),e}return a(n,e),u(n,[{key:"render",value:function(){var e=(this.b,this.props.initialData);return i.createElement(f.Card,{initialData:e},i.createElement(l.CheckboxGroup,{checkboxInputs:e.checkboxInputs}))}}]),n}(i.Component);Object.defineProperty(n,"__esModule",{value:!0}),n.default=s},331:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function o(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!=typeof n&&"function"!=typeof n?e:n}function a(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+typeof n);e.prototype=Object.create(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(Object.setPrototypeOf?Object.setPrototypeOf(e,n):e.__proto__=n)}var u=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),i=t(0),c=t(12),f=t(102),l=t(60),s=function(e){function n(){r(this,n);var e=o(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments));return e.b=c("single-answer-card"),e}return a(n,e),u(n,[{key:"render",value:function(){var e=(this.b,this.props.initialData);return i.createElement(f.Card,{initialData:e},i.createElement(l.RadioGroup,{radioInputs:e.radioInputs}))}}]),n}(i.Component);Object.defineProperty(n,"__esModule",{value:!0}),n.default=s},332:function(e,n,t){"use strict";var r=t(333);n.App=r.default},333:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function o(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!=typeof n&&"function"!=typeof n?e:n}function a(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+typeof n);e.prototype=Object.create(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(Object.setPrototypeOf?Object.setPrototypeOf(e,n):e.__proto__=n)}function u(e){var n=e.polls.initialFormData,t=n.logo,r=n.progress;return{logo:t,progress:r}}function i(e){return{}}var c=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),f=t(0),l=t(12),s=t(72),d=t(100),p=t(101),v=t(168);t(421),t(181),t(411);var h=function(e){function n(){return r(this,n),o(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return a(n,e),c(n,[{key:"render",value:function(){var e=l("application"),n=this.props,t=n.logo,r=n.progress;return f.createElement("div",{className:e()},f.createElement("div",{className:e("body")},f.createElement(p.default,{logo:t,progress:r}),f.createElement(v.default,null),f.createElement(d.default,null)))}}]),n}(f.Component);n.App=h,Object.defineProperty(n,"__esModule",{value:!0}),n.default=s.connect(u,i)(h)},410:function(e,n){},411:function(e,n){},421:function(e,n){},620:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(97);Object.defineProperty(n,"take",{enumerable:!0,get:function(){return r.take}}),Object.defineProperty(n,"takem",{enumerable:!0,get:function(){return r.takem}}),Object.defineProperty(n,"put",{enumerable:!0,get:function(){return r.put}}),Object.defineProperty(n,"race",{enumerable:!0,get:function(){return r.race}}),Object.defineProperty(n,"call",{enumerable:!0,get:function(){return r.call}}),Object.defineProperty(n,"apply",{enumerable:!0,get:function(){return r.apply}}),Object.defineProperty(n,"cps",{enumerable:!0,get:function(){return r.cps}}),Object.defineProperty(n,"fork",{enumerable:!0,get:function(){return r.fork}}),Object.defineProperty(n,"spawn",{enumerable:!0,get:function(){return r.spawn}}),Object.defineProperty(n,"join",{enumerable:!0,get:function(){return r.join}}),Object.defineProperty(n,"cancel",{enumerable:!0,get:function(){return r.cancel}}),Object.defineProperty(n,"select",{enumerable:!0,get:function(){return r.select}}),Object.defineProperty(n,"actionChannel",{enumerable:!0,get:function(){return r.actionChannel}}),Object.defineProperty(n,"cancelled",{enumerable:!0,get:function(){return r.cancelled}}),Object.defineProperty(n,"flush",{enumerable:!0,get:function(){return r.flush}}),Object.defineProperty(n,"takeEvery",{enumerable:!0,get:function(){return r.takeEvery}}),Object.defineProperty(n,"takeLatest",{enumerable:!0,get:function(){return r.takeLatest}}),Object.defineProperty(n,"throttle",{enumerable:!0,get:function(){return r.throttle}})},621:function(e,n,t){"use strict";function r(e){if(e&&e.__esModule)return e;var n={};if(null!=e)for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&(n[t]=e[t]);return n.default=e,n}function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0}),n.utils=n.effects=n.CANCEL=n.delay=n.throttle=n.takeLatest=n.takeEvery=n.buffers=n.channel=n.eventChannel=n.END=n.runSaga=void 0;var a=t(623);Object.defineProperty(n,"runSaga",{enumerable:!0,get:function(){return a.runSaga}});var u=t(96);Object.defineProperty(n,"END",{enumerable:!0,get:function(){return u.END}}),Object.defineProperty(n,"eventChannel",{enumerable:!0,get:function(){return u.eventChannel}}),Object.defineProperty(n,"channel",{enumerable:!0,get:function(){return u.channel}});var i=t(95);Object.defineProperty(n,"buffers",{enumerable:!0,get:function(){return i.buffers}});var c=t(298);Object.defineProperty(n,"takeEvery",{enumerable:!0,get:function(){return c.takeEvery}}),Object.defineProperty(n,"takeLatest",{enumerable:!0,get:function(){return c.takeLatest}}),Object.defineProperty(n,"throttle",{enumerable:!0,get:function(){return c.throttle}});var f=t(33);Object.defineProperty(n,"delay",{enumerable:!0,get:function(){return f.delay}}),Object.defineProperty(n,"CANCEL",{enumerable:!0,get:function(){return f.CANCEL}});var l=t(622),s=o(l),d=t(620),p=r(d),v=t(624),h=r(v);n.default=s.default,n.effects=p,n.utils=h},622:function(e,n,t){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function o(e){if(Array.isArray(e)){for(var n=0,t=Array(e.length);n<e.length;n++)t[n]=e[n];return t}return Array.from(e)}function a(){function e(e){function a(e,t,r){return(0,c.default)(e.apply(void 0,o(t)),s.subscribe,d,i,n,r,e.name)}var i=e.getState,l=e.dispatch;t=a;var s=(0,f.emitter)();s.emit=(n.emitter||u.ident)(s.emit);var d=(0,u.wrapSagaDispatch)(l);return function(e){return function(n){r&&r.actionDispatched(n);var t=e(n);return s.emit(n),t}}}var n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=void 0,r=n.sagaMonitor;if(r&&(r.effectTriggered=r.effectTriggered||u.noop,r.effectResolved=r.effectResolved||u.noop,r.effectRejected=r.effectRejected||u.noop,r.effectCancelled=r.effectCancelled||u.noop,r.actionDispatched=r.actionDispatched||u.noop),u.is.func(n))throw new Error("Saga middleware no longer accept Generator functions. Use sagaMiddleware.run instead");if(n.logger&&!u.is.func(n.logger))throw new Error("`options.logger` passed to the Saga middleware is not a function!");if(n.onerror&&(u.isDev&&(0,u.log)("warn","`options.onerror` is deprecated. Use `options.onError` instead."),n.onError=n.onerror,delete n.onerror),n.onError&&!u.is.func(n.onError))throw new Error("`options.onError` passed to the Saga middleware is not a function!");if(n.emitter&&!u.is.func(n.emitter))throw new Error("`options.emitter` passed to the Saga middleware is not a function!");return e.run=function(e){for(var n=arguments.length,o=Array(n>1?n-1:0),a=1;a<n;a++)o[a-1]=arguments[a];(0,u.check)(t,u.is.notUndef,"Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware"),(0,u.check)(e,u.is.func,"sagaMiddleware.run(saga, ...args): saga argument must be a Generator function!");var i=(0,u.uid)();r&&r.effectTriggered({effectId:i,root:!0,parentEffectId:0,effect:{root:!0,saga:e,args:o}});var c=t(e,o,i);return r&&r.effectResolved(i,c),c},e}Object.defineProperty(n,"__esModule",{value:!0}),n.default=a;var u=t(33),i=t(154),c=r(i),f=t(96)},623:function(e,n,t){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function o(e,n){var t=n.subscribe,r=n.dispatch,o=n.getState,u=n.sagaMonitor,c=n.logger,f=n.onError;(0,a.check)(e,a.is.iterator,"runSaga must be called on an iterator");var l=(0,a.uid)();u&&(r=(0,a.wrapSagaDispatch)(r),u.effectTriggered({effectId:l,root:!0,parentEffectId:0,effect:{root:!0,saga:e,args:[]}}));var s=(0,i.default)(e,t,r,o,{sagaMonitor:u,logger:c,onError:f},l,e.name);return u&&u.effectResolved(l,s),s}Object.defineProperty(n,"__esModule",{value:!0}),n.runSaga=o;var a=t(33),u=t(154),i=r(u)},624:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(33);Object.defineProperty(n,"TASK",{enumerable:!0,get:function(){return r.TASK}}),Object.defineProperty(n,"SAGA_ACTION",{enumerable:!0,get:function(){return r.SAGA_ACTION}}),Object.defineProperty(n,"noop",{enumerable:!0,get:function(){return r.noop}}),Object.defineProperty(n,"is",{enumerable:!0,get:function(){return r.is}}),Object.defineProperty(n,"deferred",{enumerable:!0,get:function(){return r.deferred}}),Object.defineProperty(n,"arrayOfDeffered",{enumerable:!0,get:function(){return r.arrayOfDeffered}}),Object.defineProperty(n,"createMockTask",{enumerable:!0,get:function(){return r.createMockTask}});var o=t(97);Object.defineProperty(n,"asEffect",{enumerable:!0,get:function(){return o.asEffect}});var a=t(154);Object.defineProperty(n,"CHANNEL_END",{enumerable:!0,get:function(){return a.CHANNEL_END}})},667:function(e,n,t){"use strict";var r=t(157),o=t(303),a=t(98);a(),document.addEventListener("DOMContentLoaded",function(){var e=new r.DomParser,n=e.parseFormData(),t=new o.default,a=document.getElementById("mrForm");if(a){a.style.display="none";var u=document.createElement("div");u.setAttribute("id","root"),document.body.appendChild(u),t.passFormDataInStore(n),t.render()}})},95:function(e,n,t){"use strict";function r(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:10,n=arguments[1],t=new Array(e),r=0,o=0,i=0,l=function(n){t[o]=n,o=(o+1)%e,r++},s=function(){if(0!=r){var n=t[i];return t[i]=null,r--,i=(i+1)%e,n}},d=function(){for(var e=[];r;)e.push(s());return e};return{isEmpty:function(){return 0==r},put:function(s){if(r<e)l(s);else{var p=void 0;switch(n){case u:throw new Error(a);case c:t[o]=s,o=(o+1)%e,i=o;break;case f:p=2*e,t=d(),r=t.length,o=t.length,i=0,t.length=p,e=p,l(s)}}},take:s,flush:d}}Object.defineProperty(n,"__esModule",{value:!0}),n.buffers=n.BUFFER_OVERFLOW=void 0;var o=t(33),a=n.BUFFER_OVERFLOW="Channel's Buffer overflow!",u=1,i=2,c=3,f=4,l={isEmpty:o.kTrue,put:o.noop,take:o.noop};n.buffers={none:function(){return l},fixed:function(e){return r(e,u)},dropping:function(e){return r(e,i)},sliding:function(e){return r(e,c)},expanding:function(e){return r(e,f)}}},96:function(e,n,t){"use strict";function r(){function e(e){return t.push(e),function(){return(0,c.remove)(t,e)}}function n(e){for(var n=t.slice(),r=0,o=n.length;r<o;r++)n[r](e)}var t=[];return{subscribe:e,emit:n}}function o(){function e(){if(u&&i.length)throw(0,c.internalErr)("Cannot have a closed channel with pending takers");if(i.length&&!a.isEmpty())throw(0,c.internalErr)("Cannot have pending takers with non empty buffer")}function n(n){if(e(),(0,c.check)(n,c.is.notUndef,h),!u){if(!i.length)return a.put(n);for(var t=0;t<i.length;t++){var r=i[t];if(!r[c.MATCH]||r[c.MATCH](n))return i.splice(t,1),r(n)}}}function t(n){e(),(0,c.check)(n,c.is.func,"channel.take's callback must be a function"),
-u&&a.isEmpty()?n(d):a.isEmpty()?(i.push(n),n.cancel=function(){return(0,c.remove)(i,n)}):n(a.take())}function r(n){return e(),(0,c.check)(n,c.is.func,"channel.flush' callback must be a function"),u&&a.isEmpty()?void n(d):void n(a.flush())}function o(){if(e(),!u&&(u=!0,i.length)){var n=i;i=[];for(var t=0,r=n.length;t<r;t++)n[t](d)}}var a=arguments.length>0&&void 0!==arguments[0]?arguments[0]:f.buffers.fixed(),u=!1,i=[];return(0,c.check)(a,c.is.buffer,v),{take:t,put:n,flush:r,close:o,get __takers__(){return i},get __closed__(){return u}}}function a(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:f.buffers.none(),t=arguments[2];arguments.length>2&&(0,c.check)(t,c.is.func,"Invalid match function passed to eventChannel");var r=o(n),a=e(function(e){return p(e)?void r.close():void(t&&!t(e)||r.put(e))});if(!c.is.func(a))throw new Error("in eventChannel: subscribe should return a function to unsubscribe");return{take:r.take,flush:r.flush,close:function(){r.__closed__||(r.close(),a())}}}function u(e){var n=a(function(n){return e(function(e){return e[c.SAGA_ACTION]?void n(e):void(0,l.asap)(function(){return n(e)})})});return i({},n,{take:function(e,t){arguments.length>1&&((0,c.check)(t,c.is.func,"channel.take's matcher argument must be a function"),e[c.MATCH]=t),n.take(e)}})}Object.defineProperty(n,"__esModule",{value:!0}),n.UNDEFINED_INPUT_ERROR=n.INVALID_BUFFER=n.isEnd=n.END=void 0;var i=Object.assign||function(e){for(var n=1;n<arguments.length;n++){var t=arguments[n];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e};n.emitter=r,n.channel=o,n.eventChannel=a,n.stdChannel=u;var c=t(33),f=t(95),l=t(299),s="@@redux-saga/CHANNEL_END",d=n.END={type:s},p=n.isEnd=function(e){return e&&e.type===s},v=n.INVALID_BUFFER="invalid buffer passed to channel factory function",h=n.UNDEFINED_INPUT_ERROR="Saga was provided with an undefined action"},97:function(e,n,t){"use strict";function r(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}function o(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"*";if(arguments.length&&(0,_.check)(arguments[0],_.is.notUndef,"take(patternOrChannel): patternOrChannel is undefined"),_.is.pattern(e))return U(A,{pattern:e});if(_.is.channel(e))return U(A,{channel:e});throw new Error("take(patternOrChannel): argument "+String(e)+" is not valid channel or a valid pattern")}function a(e,n){return arguments.length>1?((0,_.check)(e,_.is.notUndef,"put(channel, action): argument channel is undefined"),(0,_.check)(e,_.is.channel,"put(channel, action): argument "+e+" is not a valid channel"),(0,_.check)(n,_.is.notUndef,"put(channel, action): argument action is undefined")):((0,_.check)(e,_.is.notUndef,"put(action): argument action is undefined"),n=e,e=null),U(P,{channel:e,action:n})}function u(e){return U(C,e)}function i(e,n,t){(0,_.check)(n,_.is.notUndef,e+": argument fn is undefined");var r=null;if(_.is.array(n)){var o=n,a=O(o,2);r=a[0],n=a[1]}else if(n.fn){var u=n;r=u.context,n=u.fn}return(0,_.check)(n,_.is.func,e+": argument "+n+" is not a function"),{context:r,fn:n,args:t}}function c(e){for(var n=arguments.length,t=Array(n>1?n-1:0),r=1;r<n;r++)t[r-1]=arguments[r];return U(T,i("call",e,t))}function f(e,n){var t=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[];return U(T,i("apply",{context:e,fn:n},t))}function l(e){for(var n=arguments.length,t=Array(n>1?n-1:0),r=1;r<n;r++)t[r-1]=arguments[r];return U(S,i("cps",e,t))}function s(e){for(var n=arguments.length,t=Array(n>1?n-1:0),r=1;r<n;r++)t[r-1]=arguments[r];return U(N,i("fork",e,t))}function d(e){for(var n=arguments.length,t=Array(n>1?n-1:0),r=1;r<n;r++)t[r-1]=arguments[r];var o=s.apply(void 0,[e].concat(t));return o[N].detached=!0,o}function p(e){if(_.is.array(e))return e.map(p);if((0,_.check)(e,_.is.notUndef,"join(task): argument task is undefined"),!H(e))throw new Error("join(task): argument "+e+" is not a valid Task object \n(HINT: if you are getting this errors in tests, consider using createMockTask from redux-saga/utils)");return U(R,e)}function v(e){if((0,_.check)(e,_.is.notUndef,"cancel(task): argument task is undefined"),!H(e))throw new Error("cancel(task): argument "+e+" is not a valid Task object \n(HINT: if you are getting this errors in tests, consider using createMockTask from redux-saga/utils)");return U(D,e)}function h(e){for(var n=arguments.length,t=Array(n>1?n-1:0),r=1;r<n;r++)t[r-1]=arguments[r];return 0===arguments.length?e=_.ident:((0,_.check)(e,_.is.notUndef,"select(selector,[...]): argument selector is undefined"),(0,_.check)(e,_.is.func,"select(selector,[...]): argument "+e+" is not a function")),U(L,{selector:e,args:t})}function y(e,n){return(0,_.check)(e,_.is.notUndef,"actionChannel(pattern,...): argument pattern is undefined"),arguments.length>1&&((0,_.check)(n,_.is.notUndef,"actionChannel(pattern, buffer): argument buffer is undefined"),(0,_.check)(n,_.is.buffer,"actionChannel(pattern, buffer): argument "+n+" is not a valid buffer")),U(I,{pattern:e,buffer:n})}function g(){return U(M,{})}function b(e){return(0,_.check)(e,_.is.channel,"flush(channel): argument "+e+" is not valid channel"),U(F,e)}function m(e,n){for(var t=arguments.length,r=Array(t>2?t-2:0),o=2;o<t;o++)r[o-2]=arguments[o];return s.apply(void 0,[w.takeEveryHelper,e,n].concat(r))}function E(e,n){for(var t=arguments.length,r=Array(t>2?t-2:0),o=2;o<t;o++)r[o-2]=arguments[o];return s.apply(void 0,[w.takeLatestHelper,e,n].concat(r))}function k(e,n,t){for(var r=arguments.length,o=Array(r>3?r-3:0),a=3;a<r;a++)o[a-3]=arguments[a];return s.apply(void 0,[w.throttleHelper,e,n,t].concat(o))}Object.defineProperty(n,"__esModule",{value:!0}),n.asEffect=n.takem=void 0;var O=function(){function e(e,n){var t=[],r=!0,o=!1,a=void 0;try{for(var u,i=e[Symbol.iterator]();!(r=(u=i.next()).done)&&(t.push(u.value),!n||t.length!==n);r=!0);}catch(e){o=!0,a=e}finally{try{!r&&i.return&&i.return()}finally{if(o)throw a}}return t}return function(n,t){if(Array.isArray(n))return n;if(Symbol.iterator in Object(n))return e(n,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();n.take=o,n.put=a,n.race=u,n.call=c,n.apply=f,n.cps=l,n.fork=s,n.spawn=d,n.join=p,n.cancel=v,n.select=h,n.actionChannel=y,n.cancelled=g,n.flush=b,n.takeEvery=m,n.takeLatest=E,n.throttle=k;var _=t(33),w=t(298),j=(0,_.sym)("IO"),A="TAKE",P="PUT",C="RACE",T="CALL",S="CPS",N="FORK",R="JOIN",D="CANCEL",L="SELECT",I="ACTION_CHANNEL",M="CANCELLED",F="FLUSH",x=function(e,n){return e+" has been deprecated in favor of "+n+", please update your code"},U=function(e,n){var t;return t={},r(t,j,!0),r(t,e,n),t};o.maybe=function(){var e=o.apply(void 0,arguments);return e[A].maybe=!0,e};n.takem=(0,_.deprecate)(o.maybe,x("takem","take.maybe"));a.resolve=function(){var e=a.apply(void 0,arguments);return e[P].resolve=!0,e},a.sync=(0,_.deprecate)(a.resolve,x("put.sync","put.resolve"));var H=function(e){return e[_.TASK]},q=function(e){return function(n){return n&&n[j]&&n[e]}};n.asEffect={take:q(A),put:q(P),race:q(C),call:q(T),cps:q(S),fork:q(N),join:q(R),cancel:q(D),select:q(L),actionChannel:q(I),cancelled:q(M),flush:q(F)}}},[667]);
+webpackJsonp([1],{
+
+/***/ "../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./features/polls/view/components/MultipleAnswerCard/style.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")();
+// imports
+
+
+// module
+exports.push([module.i, ".multiple-answer-card {\n  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);\n  background-color: #fff;\n  border-radius: 2px;\n}\n.multiple-answer-card__content {\n  padding: 65px;\n}\n.multiple-answer-card__text {\n  font-size: 1.42rem;\n  padding: 0 10px;\n  color: rgba(0,0,0,0.87);\n}\n.multiple-answer-card__button-control {\n  text-align: center;\n  padding-top: 36px;\n}\n.multiple-answer-card__options {\n  padding-top: 30px;\n}\n", ""]);
+
+// exports
+exports.locals = {
+	"multiple-answer-card": "multiple-answer-card",
+	"multiple-answer-card__content": "multiple-answer-card__content",
+	"multiple-answer-card__text": "multiple-answer-card__text",
+	"multiple-answer-card__button-control": "multiple-answer-card__button-control",
+	"multiple-answer-card__options": "multiple-answer-card__options"
+};
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./modules/App/view/styles.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")();
+// imports
+
+
+// module
+exports.push([module.i, ".application {\n  min-height: 100%;\n  background-color: #dedede;\n}\n.application__body {\n  max-width: 1600px;\n  width: 80%;\n  margin: 0 auto;\n}\n", ""]);
+
+// exports
+exports.locals = {
+	"application": "application",
+	"application__body": "application__body"
+};
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/styles/base.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")();
+// imports
+
+
+// module
+exports.push([module.i, "html {\n  font-size: 14px;\n  color: #272727;\n  background: #fff;\n  font-family: 'SegoeUI', sans-serif;\n}\nbody {\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\na {\n  color: #272727;\n  text-decoration: none;\n}\na:hover {\n  color: #171717;\n  text-decoration: none;\n}\na:focus {\n  color: #272727;\n  text-decoration: none;\n}\nhtml,\nbody,\n#root {\n  height: 100%;\n}\n@font-face {\n  font-family: SegoeUI;\n  font-style: normal;\n  src: url(" + __webpack_require__("./shared/view/styles/fonts/SegoeUI/SegoeUIRegular.ttf") + ");\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/effects.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _io = __webpack_require__("../node_modules/redux-saga/lib/internal/io.js");
+
+Object.defineProperty(exports, 'take', {
+  enumerable: true,
+  get: function get() {
+    return _io.take;
+  }
+});
+Object.defineProperty(exports, 'takem', {
+  enumerable: true,
+  get: function get() {
+    return _io.takem;
+  }
+});
+Object.defineProperty(exports, 'put', {
+  enumerable: true,
+  get: function get() {
+    return _io.put;
+  }
+});
+Object.defineProperty(exports, 'race', {
+  enumerable: true,
+  get: function get() {
+    return _io.race;
+  }
+});
+Object.defineProperty(exports, 'call', {
+  enumerable: true,
+  get: function get() {
+    return _io.call;
+  }
+});
+Object.defineProperty(exports, 'apply', {
+  enumerable: true,
+  get: function get() {
+    return _io.apply;
+  }
+});
+Object.defineProperty(exports, 'cps', {
+  enumerable: true,
+  get: function get() {
+    return _io.cps;
+  }
+});
+Object.defineProperty(exports, 'fork', {
+  enumerable: true,
+  get: function get() {
+    return _io.fork;
+  }
+});
+Object.defineProperty(exports, 'spawn', {
+  enumerable: true,
+  get: function get() {
+    return _io.spawn;
+  }
+});
+Object.defineProperty(exports, 'join', {
+  enumerable: true,
+  get: function get() {
+    return _io.join;
+  }
+});
+Object.defineProperty(exports, 'cancel', {
+  enumerable: true,
+  get: function get() {
+    return _io.cancel;
+  }
+});
+Object.defineProperty(exports, 'select', {
+  enumerable: true,
+  get: function get() {
+    return _io.select;
+  }
+});
+Object.defineProperty(exports, 'actionChannel', {
+  enumerable: true,
+  get: function get() {
+    return _io.actionChannel;
+  }
+});
+Object.defineProperty(exports, 'cancelled', {
+  enumerable: true,
+  get: function get() {
+    return _io.cancelled;
+  }
+});
+Object.defineProperty(exports, 'flush', {
+  enumerable: true,
+  get: function get() {
+    return _io.flush;
+  }
+});
+Object.defineProperty(exports, 'takeEvery', {
+  enumerable: true,
+  get: function get() {
+    return _io.takeEvery;
+  }
+});
+Object.defineProperty(exports, 'takeLatest', {
+  enumerable: true,
+  get: function get() {
+    return _io.takeLatest;
+  }
+});
+Object.defineProperty(exports, 'throttle', {
+  enumerable: true,
+  get: function get() {
+    return _io.throttle;
+  }
+});
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utils = exports.effects = exports.CANCEL = exports.delay = exports.throttle = exports.takeLatest = exports.takeEvery = exports.buffers = exports.channel = exports.eventChannel = exports.END = exports.runSaga = undefined;
+
+var _runSaga = __webpack_require__("../node_modules/redux-saga/lib/internal/runSaga.js");
+
+Object.defineProperty(exports, 'runSaga', {
+  enumerable: true,
+  get: function get() {
+    return _runSaga.runSaga;
+  }
+});
+
+var _channel = __webpack_require__("../node_modules/redux-saga/lib/internal/channel.js");
+
+Object.defineProperty(exports, 'END', {
+  enumerable: true,
+  get: function get() {
+    return _channel.END;
+  }
+});
+Object.defineProperty(exports, 'eventChannel', {
+  enumerable: true,
+  get: function get() {
+    return _channel.eventChannel;
+  }
+});
+Object.defineProperty(exports, 'channel', {
+  enumerable: true,
+  get: function get() {
+    return _channel.channel;
+  }
+});
+
+var _buffers = __webpack_require__("../node_modules/redux-saga/lib/internal/buffers.js");
+
+Object.defineProperty(exports, 'buffers', {
+  enumerable: true,
+  get: function get() {
+    return _buffers.buffers;
+  }
+});
+
+var _sagaHelpers = __webpack_require__("../node_modules/redux-saga/lib/internal/sagaHelpers.js");
+
+Object.defineProperty(exports, 'takeEvery', {
+  enumerable: true,
+  get: function get() {
+    return _sagaHelpers.takeEvery;
+  }
+});
+Object.defineProperty(exports, 'takeLatest', {
+  enumerable: true,
+  get: function get() {
+    return _sagaHelpers.takeLatest;
+  }
+});
+Object.defineProperty(exports, 'throttle', {
+  enumerable: true,
+  get: function get() {
+    return _sagaHelpers.throttle;
+  }
+});
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+Object.defineProperty(exports, 'delay', {
+  enumerable: true,
+  get: function get() {
+    return _utils.delay;
+  }
+});
+Object.defineProperty(exports, 'CANCEL', {
+  enumerable: true,
+  get: function get() {
+    return _utils.CANCEL;
+  }
+});
+
+var _middleware = __webpack_require__("../node_modules/redux-saga/lib/internal/middleware.js");
+
+var _middleware2 = _interopRequireDefault(_middleware);
+
+var _effects = __webpack_require__("../node_modules/redux-saga/lib/effects.js");
+
+var effects = _interopRequireWildcard(_effects);
+
+var _utils2 = __webpack_require__("../node_modules/redux-saga/lib/utils.js");
+
+var utils = _interopRequireWildcard(_utils2);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _middleware2.default;
+exports.effects = effects;
+exports.utils = utils;
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/buffers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.buffers = exports.BUFFER_OVERFLOW = undefined;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var BUFFER_OVERFLOW = exports.BUFFER_OVERFLOW = 'Channel\'s Buffer overflow!';
+
+var ON_OVERFLOW_THROW = 1;
+var ON_OVERFLOW_DROP = 2;
+var ON_OVERFLOW_SLIDE = 3;
+var ON_OVERFLOW_EXPAND = 4;
+
+var zeroBuffer = { isEmpty: _utils.kTrue, put: _utils.noop, take: _utils.noop };
+
+function ringBuffer() {
+  var limit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
+  var overflowAction = arguments[1];
+
+  var arr = new Array(limit);
+  var length = 0;
+  var pushIndex = 0;
+  var popIndex = 0;
+
+  var push = function push(it) {
+    arr[pushIndex] = it;
+    pushIndex = (pushIndex + 1) % limit;
+    length++;
+  };
+
+  var take = function take() {
+    if (length != 0) {
+      var it = arr[popIndex];
+      arr[popIndex] = null;
+      length--;
+      popIndex = (popIndex + 1) % limit;
+      return it;
+    }
+  };
+
+  var flush = function flush() {
+    var items = [];
+    while (length) {
+      items.push(take());
+    }
+    return items;
+  };
+
+  return {
+    isEmpty: function isEmpty() {
+      return length == 0;
+    },
+    put: function put(it) {
+      if (length < limit) {
+        push(it);
+      } else {
+        var doubledLimit = void 0;
+        switch (overflowAction) {
+          case ON_OVERFLOW_THROW:
+            throw new Error(BUFFER_OVERFLOW);
+          case ON_OVERFLOW_SLIDE:
+            arr[pushIndex] = it;
+            pushIndex = (pushIndex + 1) % limit;
+            popIndex = pushIndex;
+            break;
+          case ON_OVERFLOW_EXPAND:
+            doubledLimit = 2 * limit;
+
+            arr = flush();
+
+            length = arr.length;
+            pushIndex = arr.length;
+            popIndex = 0;
+
+            arr.length = doubledLimit;
+            limit = doubledLimit;
+
+            push(it);
+            break;
+          default:
+          // DROP
+        }
+      }
+    },
+    take: take, flush: flush
+  };
+}
+
+var buffers = exports.buffers = {
+  none: function none() {
+    return zeroBuffer;
+  },
+  fixed: function fixed(limit) {
+    return ringBuffer(limit, ON_OVERFLOW_THROW);
+  },
+  dropping: function dropping(limit) {
+    return ringBuffer(limit, ON_OVERFLOW_DROP);
+  },
+  sliding: function sliding(limit) {
+    return ringBuffer(limit, ON_OVERFLOW_SLIDE);
+  },
+  expanding: function expanding(initialSize) {
+    return ringBuffer(initialSize, ON_OVERFLOW_EXPAND);
+  }
+};
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/channel.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UNDEFINED_INPUT_ERROR = exports.INVALID_BUFFER = exports.isEnd = exports.END = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.emitter = emitter;
+exports.channel = channel;
+exports.eventChannel = eventChannel;
+exports.stdChannel = stdChannel;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _buffers = __webpack_require__("../node_modules/redux-saga/lib/internal/buffers.js");
+
+var _scheduler = __webpack_require__("../node_modules/redux-saga/lib/internal/scheduler.js");
+
+var CHANNEL_END_TYPE = '@@redux-saga/CHANNEL_END';
+var END = exports.END = { type: CHANNEL_END_TYPE };
+var isEnd = exports.isEnd = function isEnd(a) {
+  return a && a.type === CHANNEL_END_TYPE;
+};
+
+function emitter() {
+  var subscribers = [];
+
+  function subscribe(sub) {
+    subscribers.push(sub);
+    return function () {
+      return (0, _utils.remove)(subscribers, sub);
+    };
+  }
+
+  function emit(item) {
+    var arr = subscribers.slice();
+    for (var i = 0, len = arr.length; i < len; i++) {
+      arr[i](item);
+    }
+  }
+
+  return {
+    subscribe: subscribe,
+    emit: emit
+  };
+}
+
+var INVALID_BUFFER = exports.INVALID_BUFFER = 'invalid buffer passed to channel factory function';
+var UNDEFINED_INPUT_ERROR = exports.UNDEFINED_INPUT_ERROR = 'Saga was provided with an undefined action';
+
+if (true) {
+  exports.UNDEFINED_INPUT_ERROR = UNDEFINED_INPUT_ERROR += '\nHints:\n    - check that your Action Creator returns a non-undefined value\n    - if the Saga was started using runSaga, check that your subscribe source provides the action to its listeners\n  ';
+}
+
+function channel() {
+  var buffer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _buffers.buffers.fixed();
+
+  var closed = false;
+  var takers = [];
+
+  (0, _utils.check)(buffer, _utils.is.buffer, INVALID_BUFFER);
+
+  function checkForbiddenStates() {
+    if (closed && takers.length) {
+      throw (0, _utils.internalErr)('Cannot have a closed channel with pending takers');
+    }
+    if (takers.length && !buffer.isEmpty()) {
+      throw (0, _utils.internalErr)('Cannot have pending takers with non empty buffer');
+    }
+  }
+
+  function put(input) {
+    checkForbiddenStates();
+    (0, _utils.check)(input, _utils.is.notUndef, UNDEFINED_INPUT_ERROR);
+    if (closed) {
+      return;
+    }
+    if (!takers.length) {
+      return buffer.put(input);
+    }
+    for (var i = 0; i < takers.length; i++) {
+      var cb = takers[i];
+      if (!cb[_utils.MATCH] || cb[_utils.MATCH](input)) {
+        takers.splice(i, 1);
+        return cb(input);
+      }
+    }
+  }
+
+  function take(cb) {
+    checkForbiddenStates();
+    (0, _utils.check)(cb, _utils.is.func, 'channel.take\'s callback must be a function');
+
+    if (closed && buffer.isEmpty()) {
+      cb(END);
+    } else if (!buffer.isEmpty()) {
+      cb(buffer.take());
+    } else {
+      takers.push(cb);
+      cb.cancel = function () {
+        return (0, _utils.remove)(takers, cb);
+      };
+    }
+  }
+
+  function flush(cb) {
+    checkForbiddenStates(); // TODO: check if some new state should be forbidden now
+    (0, _utils.check)(cb, _utils.is.func, 'channel.flush\' callback must be a function');
+    if (closed && buffer.isEmpty()) {
+      cb(END);
+      return;
+    }
+    cb(buffer.flush());
+  }
+
+  function close() {
+    checkForbiddenStates();
+    if (!closed) {
+      closed = true;
+      if (takers.length) {
+        var arr = takers;
+        takers = [];
+        for (var i = 0, len = arr.length; i < len; i++) {
+          arr[i](END);
+        }
+      }
+    }
+  }
+
+  return { take: take, put: put, flush: flush, close: close,
+    get __takers__() {
+      return takers;
+    },
+    get __closed__() {
+      return closed;
+    }
+  };
+}
+
+function eventChannel(subscribe) {
+  var buffer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _buffers.buffers.none();
+  var matcher = arguments[2];
+
+  /**
+    should be if(typeof matcher !== undefined) instead?
+    see PR #273 for a background discussion
+  **/
+  if (arguments.length > 2) {
+    (0, _utils.check)(matcher, _utils.is.func, 'Invalid match function passed to eventChannel');
+  }
+
+  var chan = channel(buffer);
+  var unsubscribe = subscribe(function (input) {
+    if (isEnd(input)) {
+      chan.close();
+      return;
+    }
+    if (matcher && !matcher(input)) {
+      return;
+    }
+    chan.put(input);
+  });
+
+  if (!_utils.is.func(unsubscribe)) {
+    throw new Error('in eventChannel: subscribe should return a function to unsubscribe');
+  }
+
+  return {
+    take: chan.take,
+    flush: chan.flush,
+    close: function close() {
+      if (!chan.__closed__) {
+        chan.close();
+        unsubscribe();
+      }
+    }
+  };
+}
+
+function stdChannel(subscribe) {
+  var chan = eventChannel(function (cb) {
+    return subscribe(function (input) {
+      if (input[_utils.SAGA_ACTION]) {
+        cb(input);
+        return;
+      }
+      (0, _scheduler.asap)(function () {
+        return cb(input);
+      });
+    });
+  });
+
+  return _extends({}, chan, {
+    take: function take(cb, matcher) {
+      if (arguments.length > 1) {
+        (0, _utils.check)(matcher, _utils.is.func, 'channel.take\'s matcher argument must be a function');
+        cb[_utils.MATCH] = matcher;
+      }
+      chan.take(cb);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/io.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.asEffect = exports.takem = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.take = take;
+exports.put = put;
+exports.race = race;
+exports.call = call;
+exports.apply = apply;
+exports.cps = cps;
+exports.fork = fork;
+exports.spawn = spawn;
+exports.join = join;
+exports.cancel = cancel;
+exports.select = select;
+exports.actionChannel = actionChannel;
+exports.cancelled = cancelled;
+exports.flush = flush;
+exports.takeEvery = takeEvery;
+exports.takeLatest = takeLatest;
+exports.throttle = throttle;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _sagaHelpers = __webpack_require__("../node_modules/redux-saga/lib/internal/sagaHelpers.js");
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var IO = (0, _utils.sym)('IO');
+var TAKE = 'TAKE';
+var PUT = 'PUT';
+var RACE = 'RACE';
+var CALL = 'CALL';
+var CPS = 'CPS';
+var FORK = 'FORK';
+var JOIN = 'JOIN';
+var CANCEL = 'CANCEL';
+var SELECT = 'SELECT';
+var ACTION_CHANNEL = 'ACTION_CHANNEL';
+var CANCELLED = 'CANCELLED';
+var FLUSH = 'FLUSH';
+
+var deprecationWarning = function deprecationWarning(deprecated, preferred) {
+  return deprecated + ' has been deprecated in favor of ' + preferred + ', please update your code';
+};
+
+var effect = function effect(type, payload) {
+  var _ref;
+
+  return _ref = {}, _defineProperty(_ref, IO, true), _defineProperty(_ref, type, payload), _ref;
+};
+
+function take() {
+  var patternOrChannel = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '*';
+
+  if (arguments.length) {
+    (0, _utils.check)(arguments[0], _utils.is.notUndef, 'take(patternOrChannel): patternOrChannel is undefined');
+  }
+  if (_utils.is.pattern(patternOrChannel)) {
+    return effect(TAKE, { pattern: patternOrChannel });
+  }
+  if (_utils.is.channel(patternOrChannel)) {
+    return effect(TAKE, { channel: patternOrChannel });
+  }
+  throw new Error('take(patternOrChannel): argument ' + String(patternOrChannel) + ' is not valid channel or a valid pattern');
+}
+
+take.maybe = function () {
+  var eff = take.apply(undefined, arguments);
+  eff[TAKE].maybe = true;
+  return eff;
+};
+
+var takem = exports.takem = (0, _utils.deprecate)(take.maybe, deprecationWarning('takem', 'take.maybe'));
+
+function put(channel, action) {
+  if (arguments.length > 1) {
+    (0, _utils.check)(channel, _utils.is.notUndef, 'put(channel, action): argument channel is undefined');
+    (0, _utils.check)(channel, _utils.is.channel, 'put(channel, action): argument ' + channel + ' is not a valid channel');
+    (0, _utils.check)(action, _utils.is.notUndef, 'put(channel, action): argument action is undefined');
+  } else {
+    (0, _utils.check)(channel, _utils.is.notUndef, 'put(action): argument action is undefined');
+    action = channel;
+    channel = null;
+  }
+  return effect(PUT, { channel: channel, action: action });
+}
+
+put.resolve = function () {
+  var eff = put.apply(undefined, arguments);
+  eff[PUT].resolve = true;
+  return eff;
+};
+
+put.sync = (0, _utils.deprecate)(put.resolve, deprecationWarning('put.sync', 'put.resolve'));
+
+function race(effects) {
+  return effect(RACE, effects);
+}
+
+function getFnCallDesc(meth, fn, args) {
+  (0, _utils.check)(fn, _utils.is.notUndef, meth + ': argument fn is undefined');
+
+  var context = null;
+  if (_utils.is.array(fn)) {
+    var _fn = fn;
+
+    var _fn2 = _slicedToArray(_fn, 2);
+
+    context = _fn2[0];
+    fn = _fn2[1];
+  } else if (fn.fn) {
+    var _fn3 = fn;
+    context = _fn3.context;
+    fn = _fn3.fn;
+  }
+  (0, _utils.check)(fn, _utils.is.func, meth + ': argument ' + fn + ' is not a function');
+
+  return { context: context, fn: fn, args: args };
+}
+
+function call(fn) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  return effect(CALL, getFnCallDesc('call', fn, args));
+}
+
+function apply(context, fn) {
+  var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+  return effect(CALL, getFnCallDesc('apply', { context: context, fn: fn }, args));
+}
+
+function cps(fn) {
+  for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
+
+  return effect(CPS, getFnCallDesc('cps', fn, args));
+}
+
+function fork(fn) {
+  for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    args[_key3 - 1] = arguments[_key3];
+  }
+
+  return effect(FORK, getFnCallDesc('fork', fn, args));
+}
+
+function spawn(fn) {
+  for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+    args[_key4 - 1] = arguments[_key4];
+  }
+
+  var eff = fork.apply(undefined, [fn].concat(args));
+  eff[FORK].detached = true;
+  return eff;
+}
+
+var isForkedTask = function isForkedTask(task) {
+  return task[_utils.TASK];
+};
+
+function join(task) {
+  if (_utils.is.array(task)) {
+    return task.map(join);
+  }
+  (0, _utils.check)(task, _utils.is.notUndef, 'join(task): argument task is undefined');
+  if (!isForkedTask(task)) {
+    throw new Error('join(task): argument ' + task + ' is not a valid Task object \n(HINT: if you are getting this errors in tests, consider using createMockTask from redux-saga/utils)');
+  }
+
+  return effect(JOIN, task);
+}
+
+function cancel(task) {
+  (0, _utils.check)(task, _utils.is.notUndef, 'cancel(task): argument task is undefined');
+  if (!isForkedTask(task)) {
+    throw new Error('cancel(task): argument ' + task + ' is not a valid Task object \n(HINT: if you are getting this errors in tests, consider using createMockTask from redux-saga/utils)');
+  }
+
+  return effect(CANCEL, task);
+}
+
+function select(selector) {
+  for (var _len5 = arguments.length, args = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+    args[_key5 - 1] = arguments[_key5];
+  }
+
+  if (arguments.length === 0) {
+    selector = _utils.ident;
+  } else {
+    (0, _utils.check)(selector, _utils.is.notUndef, 'select(selector,[...]): argument selector is undefined');
+    (0, _utils.check)(selector, _utils.is.func, 'select(selector,[...]): argument ' + selector + ' is not a function');
+  }
+  return effect(SELECT, { selector: selector, args: args });
+}
+
+/**
+  channel(pattern, [buffer])    => creates an event channel for store actions
+**/
+function actionChannel(pattern, buffer) {
+  (0, _utils.check)(pattern, _utils.is.notUndef, 'actionChannel(pattern,...): argument pattern is undefined');
+  if (arguments.length > 1) {
+    (0, _utils.check)(buffer, _utils.is.notUndef, 'actionChannel(pattern, buffer): argument buffer is undefined');
+    (0, _utils.check)(buffer, _utils.is.buffer, 'actionChannel(pattern, buffer): argument ' + buffer + ' is not a valid buffer');
+  }
+  return effect(ACTION_CHANNEL, { pattern: pattern, buffer: buffer });
+}
+
+function cancelled() {
+  return effect(CANCELLED, {});
+}
+
+function flush(channel) {
+  (0, _utils.check)(channel, _utils.is.channel, 'flush(channel): argument ' + channel + ' is not valid channel');
+  return effect(FLUSH, channel);
+}
+
+function takeEvery(patternOrChannel, worker) {
+  for (var _len6 = arguments.length, args = Array(_len6 > 2 ? _len6 - 2 : 0), _key6 = 2; _key6 < _len6; _key6++) {
+    args[_key6 - 2] = arguments[_key6];
+  }
+
+  return fork.apply(undefined, [_sagaHelpers.takeEveryHelper, patternOrChannel, worker].concat(args));
+}
+
+function takeLatest(patternOrChannel, worker) {
+  for (var _len7 = arguments.length, args = Array(_len7 > 2 ? _len7 - 2 : 0), _key7 = 2; _key7 < _len7; _key7++) {
+    args[_key7 - 2] = arguments[_key7];
+  }
+
+  return fork.apply(undefined, [_sagaHelpers.takeLatestHelper, patternOrChannel, worker].concat(args));
+}
+
+function throttle(ms, pattern, worker) {
+  for (var _len8 = arguments.length, args = Array(_len8 > 3 ? _len8 - 3 : 0), _key8 = 3; _key8 < _len8; _key8++) {
+    args[_key8 - 3] = arguments[_key8];
+  }
+
+  return fork.apply(undefined, [_sagaHelpers.throttleHelper, ms, pattern, worker].concat(args));
+}
+
+var createAsEffectType = function createAsEffectType(type) {
+  return function (effect) {
+    return effect && effect[IO] && effect[type];
+  };
+};
+
+var asEffect = exports.asEffect = {
+  take: createAsEffectType(TAKE),
+  put: createAsEffectType(PUT),
+  race: createAsEffectType(RACE),
+  call: createAsEffectType(CALL),
+  cps: createAsEffectType(CPS),
+  fork: createAsEffectType(FORK),
+  join: createAsEffectType(JOIN),
+  cancel: createAsEffectType(CANCEL),
+  select: createAsEffectType(SELECT),
+  actionChannel: createAsEffectType(ACTION_CHANNEL),
+  cancelled: createAsEffectType(CANCELLED),
+  flush: createAsEffectType(FLUSH)
+};
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/middleware.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = sagaMiddlewareFactory;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _proc = __webpack_require__("../node_modules/redux-saga/lib/internal/proc.js");
+
+var _proc2 = _interopRequireDefault(_proc);
+
+var _channel = __webpack_require__("../node_modules/redux-saga/lib/internal/channel.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function sagaMiddlewareFactory() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var runSagaDynamically = void 0;
+  var sagaMonitor = options.sagaMonitor;
+
+  // monitors are expected to have a certain interface, let's fill-in any missing ones
+
+  if (sagaMonitor) {
+    sagaMonitor.effectTriggered = sagaMonitor.effectTriggered || _utils.noop;
+    sagaMonitor.effectResolved = sagaMonitor.effectResolved || _utils.noop;
+    sagaMonitor.effectRejected = sagaMonitor.effectRejected || _utils.noop;
+    sagaMonitor.effectCancelled = sagaMonitor.effectCancelled || _utils.noop;
+    sagaMonitor.actionDispatched = sagaMonitor.actionDispatched || _utils.noop;
+  }
+
+  if (_utils.is.func(options)) {
+    if (false) {
+      throw new Error('Saga middleware no longer accept Generator functions. Use sagaMiddleware.run instead');
+    } else {
+      throw new Error('You passed a function to the Saga middleware. You are likely trying to start a        Saga by directly passing it to the middleware. This is no longer possible starting from 0.10.0.        To run a Saga, you must do it dynamically AFTER mounting the middleware into the store.\n        Example:\n          import createSagaMiddleware from \'redux-saga\'\n          ... other imports\n\n          const sagaMiddleware = createSagaMiddleware()\n          const store = createStore(reducer, applyMiddleware(sagaMiddleware))\n          sagaMiddleware.run(saga, ...args)\n      ');
+    }
+  }
+
+  if (options.logger && !_utils.is.func(options.logger)) {
+    throw new Error('`options.logger` passed to the Saga middleware is not a function!');
+  }
+
+  if (options.onerror) {
+    if (_utils.isDev) (0, _utils.log)('warn', '`options.onerror` is deprecated. Use `options.onError` instead.');
+    options.onError = options.onerror;
+    delete options.onerror;
+  }
+
+  if (options.onError && !_utils.is.func(options.onError)) {
+    throw new Error('`options.onError` passed to the Saga middleware is not a function!');
+  }
+
+  if (options.emitter && !_utils.is.func(options.emitter)) {
+    throw new Error('`options.emitter` passed to the Saga middleware is not a function!');
+  }
+
+  function sagaMiddleware(_ref) {
+    var getState = _ref.getState,
+        dispatch = _ref.dispatch;
+
+    runSagaDynamically = runSaga;
+    var sagaEmitter = (0, _channel.emitter)();
+    sagaEmitter.emit = (options.emitter || _utils.ident)(sagaEmitter.emit);
+    var sagaDispatch = (0, _utils.wrapSagaDispatch)(dispatch);
+
+    function runSaga(saga, args, sagaId) {
+      return (0, _proc2.default)(saga.apply(undefined, _toConsumableArray(args)), sagaEmitter.subscribe, sagaDispatch, getState, options, sagaId, saga.name);
+    }
+
+    return function (next) {
+      return function (action) {
+        if (sagaMonitor) {
+          sagaMonitor.actionDispatched(action);
+        }
+        var result = next(action); // hit reducers
+        sagaEmitter.emit(action);
+        return result;
+      };
+    };
+  }
+
+  sagaMiddleware.run = function (saga) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    (0, _utils.check)(runSagaDynamically, _utils.is.notUndef, 'Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware');
+    (0, _utils.check)(saga, _utils.is.func, 'sagaMiddleware.run(saga, ...args): saga argument must be a Generator function!');
+
+    var effectId = (0, _utils.uid)();
+    if (sagaMonitor) {
+      sagaMonitor.effectTriggered({ effectId: effectId, root: true, parentEffectId: 0, effect: { root: true, saga: saga, args: args } });
+    }
+    var task = runSagaDynamically(saga, args, effectId);
+    if (sagaMonitor) {
+      sagaMonitor.effectResolved(effectId, task);
+    }
+    return task;
+  };
+
+  return sagaMiddleware;
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/proc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TASK_CANCEL = exports.CHANNEL_END = exports.NOT_ITERATOR_ERROR = undefined;
+exports.default = proc;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _scheduler = __webpack_require__("../node_modules/redux-saga/lib/internal/scheduler.js");
+
+var _io = __webpack_require__("../node_modules/redux-saga/lib/internal/io.js");
+
+var _channel = __webpack_require__("../node_modules/redux-saga/lib/internal/channel.js");
+
+var _buffers = __webpack_require__("../node_modules/redux-saga/lib/internal/buffers.js");
+
+function _defineEnumerableProperties(obj, descs) { for (var key in descs) { var desc = descs[key]; desc.configurable = desc.enumerable = true; if ("value" in desc) desc.writable = true; Object.defineProperty(obj, key, desc); } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var NOT_ITERATOR_ERROR = exports.NOT_ITERATOR_ERROR = 'proc first argument (Saga function result) must be an iterator';
+
+var CHANNEL_END = exports.CHANNEL_END = {
+  toString: function toString() {
+    return '@@redux-saga/CHANNEL_END';
+  }
+};
+var TASK_CANCEL = exports.TASK_CANCEL = {
+  toString: function toString() {
+    return '@@redux-saga/TASK_CANCEL';
+  }
+};
+
+var matchers = {
+  wildcard: function wildcard() {
+    return _utils.kTrue;
+  },
+  default: function _default(pattern) {
+    return function (input) {
+      return input.type === String(pattern);
+    };
+  },
+  array: function array(patterns) {
+    return function (input) {
+      return patterns.some(function (p) {
+        return matcher(p)(input);
+      });
+    };
+  },
+  predicate: function predicate(_predicate) {
+    return function (input) {
+      return _predicate(input);
+    };
+  }
+};
+
+function matcher(pattern) {
+  return (pattern === '*' ? matchers.wildcard : _utils.is.array(pattern) ? matchers.array : _utils.is.stringableFunc(pattern) ? matchers.default : _utils.is.func(pattern) ? matchers.predicate : matchers.default)(pattern);
+}
+
+/**
+  Used to track a parent task and its forks
+  In the new fork model, forked tasks are attached by default to their parent
+  We model this using the concept of Parent task && main Task
+  main task is the main flow of the current Generator, the parent tasks is the
+  aggregation of the main tasks + all its forked tasks.
+  Thus the whole model represents an execution tree with multiple branches (vs the
+  linear execution tree in sequential (non parallel) programming)
+
+  A parent tasks has the following semantics
+  - It completes if all its forks either complete or all cancelled
+  - If it's cancelled, all forks are cancelled as well
+  - It aborts if any uncaught error bubbles up from forks
+  - If it completes, the return value is the one returned by the main task
+**/
+function forkQueue(name, mainTask, cb) {
+  var tasks = [],
+      result = void 0,
+      completed = false;
+  addTask(mainTask);
+
+  function abort(err) {
+    cancelAll();
+    cb(err, true);
+  }
+
+  function addTask(task) {
+    tasks.push(task);
+    task.cont = function (res, isErr) {
+      if (completed) {
+        return;
+      }
+
+      (0, _utils.remove)(tasks, task);
+      task.cont = _utils.noop;
+      if (isErr) {
+        abort(res);
+      } else {
+        if (task === mainTask) {
+          result = res;
+        }
+        if (!tasks.length) {
+          completed = true;
+          cb(result);
+        }
+      }
+    };
+    // task.cont.cancel = task.cancel
+  }
+
+  function cancelAll() {
+    if (completed) {
+      return;
+    }
+    completed = true;
+    tasks.forEach(function (t) {
+      t.cont = _utils.noop;
+      t.cancel();
+    });
+    tasks = [];
+  }
+
+  return {
+    addTask: addTask,
+    cancelAll: cancelAll,
+    abort: abort,
+    getTasks: function getTasks() {
+      return tasks;
+    },
+    taskNames: function taskNames() {
+      return tasks.map(function (t) {
+        return t.name;
+      });
+    }
+  };
+}
+
+function createTaskIterator(_ref) {
+  var context = _ref.context,
+      fn = _ref.fn,
+      args = _ref.args;
+
+  if (_utils.is.iterator(fn)) {
+    return fn;
+  }
+
+  // catch synchronous failures; see #152 and #441
+  var result = void 0,
+      error = void 0;
+  try {
+    result = fn.apply(context, args);
+  } catch (err) {
+    error = err;
+  }
+
+  // i.e. a generator function returns an iterator
+  if (_utils.is.iterator(result)) {
+    return result;
+  }
+
+  // do not bubble up synchronous failures for detached forks
+  // instead create a failed task. See #152 and #441
+  return error ? (0, _utils.makeIterator)(function () {
+    throw error;
+  }) : (0, _utils.makeIterator)(function () {
+    var pc = void 0;
+    var eff = { done: false, value: result };
+    var ret = function ret(value) {
+      return { done: true, value: value };
+    };
+    return function (arg) {
+      if (!pc) {
+        pc = true;
+        return eff;
+      } else {
+        return ret(arg);
+      }
+    };
+  }());
+}
+
+var wrapHelper = function wrapHelper(helper) {
+  return { fn: helper };
+};
+
+function proc(iterator) {
+  var subscribe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {
+    return _utils.noop;
+  };
+  var dispatch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _utils.noop;
+  var getState = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _utils.noop;
+  var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+  var parentEffectId = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var name = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'anonymous';
+  var cont = arguments[7];
+
+  (0, _utils.check)(iterator, _utils.is.iterator, NOT_ITERATOR_ERROR);
+
+  var sagaMonitor = options.sagaMonitor,
+      logger = options.logger,
+      onError = options.onError;
+
+  var log = logger || _utils.log;
+  var stdChannel = (0, _channel.stdChannel)(subscribe);
+  /**
+    Tracks the current effect cancellation
+    Each time the generator progresses. calling runEffect will set a new value
+    on it. It allows propagating cancellation to child effects
+  **/
+  next.cancel = _utils.noop;
+
+  /**
+    Creates a new task descriptor for this generator, We'll also create a main task
+    to track the main flow (besides other forked tasks)
+  **/
+  var task = newTask(parentEffectId, name, iterator, cont);
+  var mainTask = { name: name, cancel: cancelMain, isRunning: true };
+  var taskQueue = forkQueue(name, mainTask, end);
+
+  /**
+    cancellation of the main task. We'll simply resume the Generator with a Cancel
+  **/
+  function cancelMain() {
+    if (mainTask.isRunning && !mainTask.isCancelled) {
+      mainTask.isCancelled = true;
+      next(TASK_CANCEL);
+    }
+  }
+
+  /**
+    This may be called by a parent generator to trigger/propagate cancellation
+    cancel all pending tasks (including the main task), then end the current task.
+     Cancellation propagates down to the whole execution tree holded by this Parent task
+    It's also propagated to all joiners of this task and their execution tree/joiners
+     Cancellation is noop for terminated/Cancelled tasks tasks
+  **/
+  function cancel() {
+    /**
+      We need to check both Running and Cancelled status
+      Tasks can be Cancelled but still Running
+    **/
+    if (iterator._isRunning && !iterator._isCancelled) {
+      iterator._isCancelled = true;
+      taskQueue.cancelAll();
+      /**
+        Ending with a Never result will propagate the Cancellation to all joiners
+      **/
+      end(TASK_CANCEL);
+    }
+  }
+  /**
+    attaches cancellation logic to this task's continuation
+    this will permit cancellation to propagate down the call chain
+  **/
+  cont && (cont.cancel = cancel);
+
+  // tracks the running status
+  iterator._isRunning = true;
+
+  // kicks up the generator
+  next();
+
+  // then return the task descriptor to the caller
+  return task;
+
+  /**
+    This is the generator driver
+    It's a recursive async/continuation function which calls itself
+    until the generator terminates or throws
+  **/
+  function next(arg, isErr) {
+    // Preventive measure. If we end up here, then there is really something wrong
+    if (!mainTask.isRunning) {
+      throw new Error('Trying to resume an already finished generator');
+    }
+
+    try {
+      var result = void 0;
+      if (isErr) {
+        result = iterator.throw(arg);
+      } else if (arg === TASK_CANCEL) {
+        /**
+          getting TASK_CANCEL automatically cancels the main task
+          We can get this value here
+           - By cancelling the parent task manually
+          - By joining a Cancelled task
+        **/
+        mainTask.isCancelled = true;
+        /**
+          Cancels the current effect; this will propagate the cancellation down to any called tasks
+        **/
+        next.cancel();
+        /**
+          If this Generator has a `return` method then invokes it
+          Thill will jump to the finally block
+        **/
+        result = _utils.is.func(iterator.return) ? iterator.return(TASK_CANCEL) : { done: true, value: TASK_CANCEL };
+      } else if (arg === CHANNEL_END) {
+        // We get CHANNEL_END by taking from a channel that ended using `take` (and not `takem` used to trap End of channels)
+        result = _utils.is.func(iterator.return) ? iterator.return() : { done: true };
+      } else {
+        result = iterator.next(arg);
+      }
+
+      if (!result.done) {
+        runEffect(result.value, parentEffectId, '', next);
+      } else {
+        /**
+          This Generator has ended, terminate the main task and notify the fork queue
+        **/
+        mainTask.isMainRunning = false;
+        mainTask.cont && mainTask.cont(result.value);
+      }
+    } catch (error) {
+      if (mainTask.isCancelled) {
+        log('error', 'uncaught at ' + name, error.message);
+      }
+      mainTask.isMainRunning = false;
+      mainTask.cont(error, true);
+    }
+  }
+
+  function end(result, isErr) {
+    iterator._isRunning = false;
+    stdChannel.close();
+    if (!isErr) {
+      if (result === TASK_CANCEL && _utils.isDev) {
+        log('info', name + ' has been cancelled', '');
+      }
+      iterator._result = result;
+      iterator._deferredEnd && iterator._deferredEnd.resolve(result);
+    } else {
+      if (result instanceof Error) {
+        result.sagaStack = 'at ' + name + ' \n ' + (result.sagaStack || result.stack);
+      }
+      if (!task.cont) {
+        log('error', 'uncaught', result.sagaStack || result.stack);
+        if (result instanceof Error && onError) {
+          onError(result);
+        }
+      }
+      iterator._error = result;
+      iterator._isAborted = true;
+      iterator._deferredEnd && iterator._deferredEnd.reject(result);
+    }
+    task.cont && task.cont(result, isErr);
+    task.joiners.forEach(function (j) {
+      return j.cb(result, isErr);
+    });
+    task.joiners = null;
+  }
+
+  function runEffect(effect, parentEffectId) {
+    var label = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+    var cb = arguments[3];
+
+    var effectId = (0, _utils.uid)();
+    sagaMonitor && sagaMonitor.effectTriggered({ effectId: effectId, parentEffectId: parentEffectId, label: label, effect: effect });
+
+    /**
+      completion callback and cancel callback are mutually exclusive
+      We can't cancel an already completed effect
+      And We can't complete an already cancelled effectId
+    **/
+    var effectSettled = void 0;
+
+    // Completion callback passed to the appropriate effect runner
+    function currCb(res, isErr) {
+      if (effectSettled) {
+        return;
+      }
+
+      effectSettled = true;
+      cb.cancel = _utils.noop; // defensive measure
+      if (sagaMonitor) {
+        isErr ? sagaMonitor.effectRejected(effectId, res) : sagaMonitor.effectResolved(effectId, res);
+      }
+
+      cb(res, isErr);
+    }
+    // tracks down the current cancel
+    currCb.cancel = _utils.noop;
+
+    // setup cancellation logic on the parent cb
+    cb.cancel = function () {
+      // prevents cancelling an already completed effect
+      if (effectSettled) {
+        return;
+      }
+
+      effectSettled = true;
+      /**
+        propagates cancel downward
+        catch uncaught cancellations errors; since we can no longer call the completion
+        callback, log errors raised during cancellations into the console
+      **/
+      try {
+        currCb.cancel();
+      } catch (err) {
+        log('error', 'uncaught at ' + name, err.message);
+      }
+      currCb.cancel = _utils.noop; // defensive measure
+
+      sagaMonitor && sagaMonitor.effectCancelled(effectId);
+    };
+
+    /**
+      each effect runner must attach its own logic of cancellation to the provided callback
+      it allows this generator to propagate cancellation downward.
+       ATTENTION! effect runners must setup the cancel logic by setting cb.cancel = [cancelMethod]
+      And the setup must occur before calling the callback
+       This is a sort of inversion of control: called async functions are responsible
+      of completing the flow by calling the provided continuation; while caller functions
+      are responsible for aborting the current flow by calling the attached cancel function
+       Library users can attach their own cancellation logic to promises by defining a
+      promise[CANCEL] method in their returned promises
+      ATTENTION! calling cancel must have no effect on an already completed or cancelled effect
+    **/
+    var data = void 0;
+    return (
+      // Non declarative effect
+      _utils.is.promise(effect) ? resolvePromise(effect, currCb) : _utils.is.helper(effect) ? runForkEffect(wrapHelper(effect), effectId, currCb) : _utils.is.iterator(effect) ? resolveIterator(effect, effectId, name, currCb)
+
+      // declarative effects
+      : _utils.is.array(effect) ? runParallelEffect(effect, effectId, currCb) : _utils.is.notUndef(data = _io.asEffect.take(effect)) ? runTakeEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.put(effect)) ? runPutEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.race(effect)) ? runRaceEffect(data, effectId, currCb) : _utils.is.notUndef(data = _io.asEffect.call(effect)) ? runCallEffect(data, effectId, currCb) : _utils.is.notUndef(data = _io.asEffect.cps(effect)) ? runCPSEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.fork(effect)) ? runForkEffect(data, effectId, currCb) : _utils.is.notUndef(data = _io.asEffect.join(effect)) ? runJoinEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.cancel(effect)) ? runCancelEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.select(effect)) ? runSelectEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.actionChannel(effect)) ? runChannelEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.flush(effect)) ? runFlushEffect(data, currCb) : _utils.is.notUndef(data = _io.asEffect.cancelled(effect)) ? runCancelledEffect(data, currCb) : /* anything else returned as is        */currCb(effect)
+    );
+  }
+
+  function resolvePromise(promise, cb) {
+    var cancelPromise = promise[_utils.CANCEL];
+    if (typeof cancelPromise === 'function') {
+      cb.cancel = cancelPromise;
+    }
+    promise.then(cb, function (error) {
+      return cb(error, true);
+    });
+  }
+
+  function resolveIterator(iterator, effectId, name, cb) {
+    proc(iterator, subscribe, dispatch, getState, options, effectId, name, cb);
+  }
+
+  function runTakeEffect(_ref2, cb) {
+    var channel = _ref2.channel,
+        pattern = _ref2.pattern,
+        maybe = _ref2.maybe;
+
+    channel = channel || stdChannel;
+    var takeCb = function takeCb(inp) {
+      return inp instanceof Error ? cb(inp, true) : (0, _channel.isEnd)(inp) && !maybe ? cb(CHANNEL_END) : cb(inp);
+    };
+    try {
+      channel.take(takeCb, matcher(pattern));
+    } catch (err) {
+      return cb(err, true);
+    }
+    cb.cancel = takeCb.cancel;
+  }
+
+  function runPutEffect(_ref3, cb) {
+    var channel = _ref3.channel,
+        action = _ref3.action,
+        resolve = _ref3.resolve;
+
+    /**
+      Schedule the put in case another saga is holding a lock.
+      The put will be executed atomically. ie nested puts will execute after
+      this put has terminated.
+    **/
+    (0, _scheduler.asap)(function () {
+      var result = void 0;
+      try {
+        result = (channel ? channel.put : dispatch)(action);
+      } catch (error) {
+        // If we have a channel or `put.resolve` was used then bubble up the error.
+        if (channel || resolve) return cb(error, true);
+        log('error', 'uncaught at ' + name, error.stack || error.message || error);
+      }
+
+      if (resolve && _utils.is.promise(result)) {
+        resolvePromise(result, cb);
+      } else {
+        return cb(result);
+      }
+    });
+    // Put effects are non cancellables
+  }
+
+  function runCallEffect(_ref4, effectId, cb) {
+    var context = _ref4.context,
+        fn = _ref4.fn,
+        args = _ref4.args;
+
+    var result = void 0;
+    // catch synchronous failures; see #152
+    try {
+      result = fn.apply(context, args);
+    } catch (error) {
+      return cb(error, true);
+    }
+    return _utils.is.promise(result) ? resolvePromise(result, cb) : _utils.is.iterator(result) ? resolveIterator(result, effectId, fn.name, cb) : cb(result);
+  }
+
+  function runCPSEffect(_ref5, cb) {
+    var context = _ref5.context,
+        fn = _ref5.fn,
+        args = _ref5.args;
+
+    // CPS (ie node style functions) can define their own cancellation logic
+    // by setting cancel field on the cb
+
+    // catch synchronous failures; see #152
+    try {
+      (function () {
+        var cpsCb = function cpsCb(err, res) {
+          return _utils.is.undef(err) ? cb(res) : cb(err, true);
+        };
+        fn.apply(context, args.concat(cpsCb));
+        if (cpsCb.cancel) {
+          cb.cancel = function () {
+            return cpsCb.cancel();
+          };
+        }
+      })();
+    } catch (error) {
+      return cb(error, true);
+    }
+  }
+
+  function runForkEffect(_ref6, effectId, cb) {
+    var context = _ref6.context,
+        fn = _ref6.fn,
+        args = _ref6.args,
+        detached = _ref6.detached;
+
+    var taskIterator = createTaskIterator({ context: context, fn: fn, args: args });
+
+    try {
+      (0, _scheduler.suspend)();
+      var _task = proc(taskIterator, subscribe, dispatch, getState, options, effectId, fn.name, detached ? null : _utils.noop);
+
+      if (detached) {
+        cb(_task);
+      } else {
+        if (taskIterator._isRunning) {
+          taskQueue.addTask(_task);
+          cb(_task);
+        } else if (taskIterator._error) {
+          taskQueue.abort(taskIterator._error);
+        } else {
+          cb(_task);
+        }
+      }
+    } finally {
+      (0, _scheduler.flush)();
+    }
+    // Fork effects are non cancellables
+  }
+
+  function runJoinEffect(t, cb) {
+    if (t.isRunning()) {
+      (function () {
+        var joiner = { task: task, cb: cb };
+        cb.cancel = function () {
+          return (0, _utils.remove)(t.joiners, joiner);
+        };
+        t.joiners.push(joiner);
+      })();
+    } else {
+      t.isAborted() ? cb(t.error(), true) : cb(t.result());
+    }
+  }
+
+  function runCancelEffect(task, cb) {
+    if (task.isRunning()) {
+      task.cancel();
+    }
+    cb();
+    // cancel effects are non cancellables
+  }
+
+  function runParallelEffect(effects, effectId, cb) {
+    if (!effects.length) {
+      return cb([]);
+    }
+
+    var completedCount = 0;
+    var completed = void 0;
+    var results = Array(effects.length);
+
+    function checkEffectEnd() {
+      if (completedCount === results.length) {
+        completed = true;
+        cb(results);
+      }
+    }
+
+    var childCbs = effects.map(function (eff, idx) {
+      var chCbAtIdx = function chCbAtIdx(res, isErr) {
+        if (completed) {
+          return;
+        }
+        if (isErr || (0, _channel.isEnd)(res) || res === CHANNEL_END || res === TASK_CANCEL) {
+          cb.cancel();
+          cb(res, isErr);
+        } else {
+          results[idx] = res;
+          completedCount++;
+          checkEffectEnd();
+        }
+      };
+      chCbAtIdx.cancel = _utils.noop;
+      return chCbAtIdx;
+    });
+
+    cb.cancel = function () {
+      if (!completed) {
+        completed = true;
+        childCbs.forEach(function (chCb) {
+          return chCb.cancel();
+        });
+      }
+    };
+
+    effects.forEach(function (eff, idx) {
+      return runEffect(eff, effectId, idx, childCbs[idx]);
+    });
+  }
+
+  function runRaceEffect(effects, effectId, cb) {
+    var completed = void 0;
+    var keys = Object.keys(effects);
+    var childCbs = {};
+
+    keys.forEach(function (key) {
+      var chCbAtKey = function chCbAtKey(res, isErr) {
+        if (completed) {
+          return;
+        }
+
+        if (isErr) {
+          // Race Auto cancellation
+          cb.cancel();
+          cb(res, true);
+        } else if (!(0, _channel.isEnd)(res) && res !== CHANNEL_END && res !== TASK_CANCEL) {
+          cb.cancel();
+          completed = true;
+          cb(_defineProperty({}, key, res));
+        }
+      };
+      chCbAtKey.cancel = _utils.noop;
+      childCbs[key] = chCbAtKey;
+    });
+
+    cb.cancel = function () {
+      // prevents unnecessary cancellation
+      if (!completed) {
+        completed = true;
+        keys.forEach(function (key) {
+          return childCbs[key].cancel();
+        });
+      }
+    };
+    keys.forEach(function (key) {
+      if (completed) {
+        return;
+      }
+      runEffect(effects[key], effectId, key, childCbs[key]);
+    });
+  }
+
+  function runSelectEffect(_ref7, cb) {
+    var selector = _ref7.selector,
+        args = _ref7.args;
+
+    try {
+      var state = selector.apply(undefined, [getState()].concat(_toConsumableArray(args)));
+      cb(state);
+    } catch (error) {
+      cb(error, true);
+    }
+  }
+
+  function runChannelEffect(_ref8, cb) {
+    var pattern = _ref8.pattern,
+        buffer = _ref8.buffer;
+
+    var match = matcher(pattern);
+    match.pattern = pattern;
+    cb((0, _channel.eventChannel)(subscribe, buffer || _buffers.buffers.fixed(), match));
+  }
+
+  function runCancelledEffect(data, cb) {
+    cb(!!mainTask.isCancelled);
+  }
+
+  function runFlushEffect(channel, cb) {
+    channel.flush(cb);
+  }
+
+  function newTask(id, name, iterator, cont) {
+    var _done, _ref9, _mutatorMap;
+
+    iterator._deferredEnd = null;
+    return _ref9 = {}, _defineProperty(_ref9, _utils.TASK, true), _defineProperty(_ref9, 'id', id), _defineProperty(_ref9, 'name', name), _done = 'done', _mutatorMap = {}, _mutatorMap[_done] = _mutatorMap[_done] || {}, _mutatorMap[_done].get = function () {
+      if (iterator._deferredEnd) {
+        return iterator._deferredEnd.promise;
+      } else {
+        var def = (0, _utils.deferred)();
+        iterator._deferredEnd = def;
+        if (!iterator._isRunning) {
+          iterator._error ? def.reject(iterator._error) : def.resolve(iterator._result);
+        }
+        return def.promise;
+      }
+    }, _defineProperty(_ref9, 'cont', cont), _defineProperty(_ref9, 'joiners', []), _defineProperty(_ref9, 'cancel', cancel), _defineProperty(_ref9, 'isRunning', function isRunning() {
+      return iterator._isRunning;
+    }), _defineProperty(_ref9, 'isCancelled', function isCancelled() {
+      return iterator._isCancelled;
+    }), _defineProperty(_ref9, 'isAborted', function isAborted() {
+      return iterator._isAborted;
+    }), _defineProperty(_ref9, 'result', function result() {
+      return iterator._result;
+    }), _defineProperty(_ref9, 'error', function error() {
+      return iterator._error;
+    }), _defineEnumerableProperties(_ref9, _mutatorMap), _ref9;
+  }
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/runSaga.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.runSaga = runSaga;
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _proc = __webpack_require__("../node_modules/redux-saga/lib/internal/proc.js");
+
+var _proc2 = _interopRequireDefault(_proc);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function runSaga(iterator, _ref) {
+  var subscribe = _ref.subscribe,
+      dispatch = _ref.dispatch,
+      getState = _ref.getState,
+      sagaMonitor = _ref.sagaMonitor,
+      logger = _ref.logger,
+      onError = _ref.onError;
+
+
+  (0, _utils.check)(iterator, _utils.is.iterator, "runSaga must be called on an iterator");
+
+  var effectId = (0, _utils.uid)();
+  if (sagaMonitor) {
+    dispatch = (0, _utils.wrapSagaDispatch)(dispatch);
+    sagaMonitor.effectTriggered({ effectId: effectId, root: true, parentEffectId: 0, effect: { root: true, saga: iterator, args: [] } });
+  }
+  var task = (0, _proc2.default)(iterator, subscribe, dispatch, getState, { sagaMonitor: sagaMonitor, logger: logger, onError: onError }, effectId, iterator.name);
+
+  if (sagaMonitor) {
+    sagaMonitor.effectResolved(effectId, task);
+  }
+
+  return task;
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/sagaHelpers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.throttle = exports.takeLatest = exports.takeEvery = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.takeEveryHelper = takeEveryHelper;
+exports.takeLatestHelper = takeLatestHelper;
+exports.throttleHelper = throttleHelper;
+
+var _channel = __webpack_require__("../node_modules/redux-saga/lib/internal/channel.js");
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+var _io = __webpack_require__("../node_modules/redux-saga/lib/internal/io.js");
+
+var _buffers = __webpack_require__("../node_modules/redux-saga/lib/internal/buffers.js");
+
+var done = { done: true, value: undefined };
+var qEnd = {};
+
+function fsmIterator(fsm, q0) {
+  var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'iterator';
+
+  var updateState = void 0,
+      qNext = q0;
+
+  function next(arg, error) {
+    if (qNext === qEnd) {
+      return done;
+    }
+
+    if (error) {
+      qNext = qEnd;
+      throw error;
+    } else {
+      updateState && updateState(arg);
+
+      var _fsm$qNext = fsm[qNext](),
+          _fsm$qNext2 = _slicedToArray(_fsm$qNext, 3),
+          q = _fsm$qNext2[0],
+          output = _fsm$qNext2[1],
+          _updateState = _fsm$qNext2[2];
+
+      qNext = q;
+      updateState = _updateState;
+      return qNext === qEnd ? done : output;
+    }
+  }
+
+  return (0, _utils.makeIterator)(next, function (error) {
+    return next(null, error);
+  }, name, true);
+}
+
+function safeName(patternOrChannel) {
+  if (_utils.is.channel(patternOrChannel)) {
+    return 'channel';
+  } else if (Array.isArray(patternOrChannel)) {
+    return String(patternOrChannel.map(function (entry) {
+      return String(entry);
+    }));
+  } else {
+    return String(patternOrChannel);
+  }
+}
+
+function takeEveryHelper(patternOrChannel, worker) {
+  for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+
+  var yTake = { done: false, value: (0, _io.take)(patternOrChannel) };
+  var yFork = function yFork(ac) {
+    return { done: false, value: _io.fork.apply(undefined, [worker].concat(args, [ac])) };
+  };
+
+  var action = void 0,
+      setAction = function setAction(ac) {
+    return action = ac;
+  };
+
+  return fsmIterator({
+    q1: function q1() {
+      return ['q2', yTake, setAction];
+    },
+    q2: function q2() {
+      return action === _channel.END ? [qEnd] : ['q1', yFork(action)];
+    }
+  }, 'q1', 'takeEvery(' + safeName(patternOrChannel) + ', ' + worker.name + ')');
+}
+
+function takeLatestHelper(patternOrChannel, worker) {
+  for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+    args[_key2 - 2] = arguments[_key2];
+  }
+
+  var yTake = { done: false, value: (0, _io.take)(patternOrChannel) };
+  var yFork = function yFork(ac) {
+    return { done: false, value: _io.fork.apply(undefined, [worker].concat(args, [ac])) };
+  };
+  var yCancel = function yCancel(task) {
+    return { done: false, value: (0, _io.cancel)(task) };
+  };
+
+  var task = void 0,
+      action = void 0;
+  var setTask = function setTask(t) {
+    return task = t;
+  };
+  var setAction = function setAction(ac) {
+    return action = ac;
+  };
+
+  return fsmIterator({
+    q1: function q1() {
+      return ['q2', yTake, setAction];
+    },
+    q2: function q2() {
+      return action === _channel.END ? [qEnd] : task ? ['q3', yCancel(task)] : ['q1', yFork(action), setTask];
+    },
+    q3: function q3() {
+      return ['q1', yFork(action), setTask];
+    }
+  }, 'q1', 'takeLatest(' + safeName(patternOrChannel) + ', ' + worker.name + ')');
+}
+
+function throttleHelper(delayLength, pattern, worker) {
+  for (var _len3 = arguments.length, args = Array(_len3 > 3 ? _len3 - 3 : 0), _key3 = 3; _key3 < _len3; _key3++) {
+    args[_key3 - 3] = arguments[_key3];
+  }
+
+  var action = void 0,
+      channel = void 0;
+
+  var yActionChannel = { done: false, value: (0, _io.actionChannel)(pattern, _buffers.buffers.sliding(1)) };
+  var yTake = function yTake() {
+    return { done: false, value: (0, _io.take)(channel, pattern) };
+  };
+  var yFork = function yFork(ac) {
+    return { done: false, value: _io.fork.apply(undefined, [worker].concat(args, [ac])) };
+  };
+  var yDelay = { done: false, value: (0, _io.call)(_utils.delay, delayLength) };
+
+  var setAction = function setAction(ac) {
+    return action = ac;
+  };
+  var setChannel = function setChannel(ch) {
+    return channel = ch;
+  };
+
+  return fsmIterator({
+    q1: function q1() {
+      return ['q2', yActionChannel, setChannel];
+    },
+    q2: function q2() {
+      return ['q3', yTake(), setAction];
+    },
+    q3: function q3() {
+      return action === _channel.END ? [qEnd] : ['q4', yFork(action)];
+    },
+    q4: function q4() {
+      return ['q2', yDelay];
+    }
+  }, 'q1', 'throttle(' + safeName(pattern) + ', ' + worker.name + ')');
+}
+
+var deprecationWarning = function deprecationWarning(helperName) {
+  return 'import ' + helperName + ' from \'redux-saga\' has been deprecated in favor of import ' + helperName + ' from \'redux-saga/effects\'.\nThe latter will not work with yield*, as helper effects are wrapped automatically for you in fork effect.\nTherefore yield ' + helperName + ' will return task descriptor to your saga and execute next lines of code.';
+};
+var takeEvery = exports.takeEvery = (0, _utils.deprecate)(takeEveryHelper, deprecationWarning('takeEvery'));
+var takeLatest = exports.takeLatest = (0, _utils.deprecate)(takeLatestHelper, deprecationWarning('takeLatest'));
+var throttle = exports.throttle = (0, _utils.deprecate)(throttleHelper, deprecationWarning('throttle'));
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/scheduler.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.asap = asap;
+exports.suspend = suspend;
+exports.flush = flush;
+
+var queue = [];
+/**
+  Variable to hold a counting semaphore
+  - Incrementing adds a lock and puts the scheduler in a `suspended` state (if it's not
+    already suspended)
+  - Decrementing releases a lock. Zero locks puts the scheduler in a `released` state. This
+    triggers flushing the queued tasks.
+**/
+var semaphore = 0;
+
+/**
+  Executes a task 'atomically'. Tasks scheduled during this execution will be queued
+  and flushed after this task has finished (assuming the scheduler endup in a released
+  state).
+**/
+function exec(task) {
+  try {
+    suspend();
+    task();
+  } finally {
+    flush();
+  }
+}
+
+/**
+  Executes or queues a task depending on the state of the scheduler (`suspended` or `released`)
+**/
+function asap(task) {
+  if (!semaphore) {
+    exec(task);
+  } else {
+    queue.push(task);
+  }
+}
+
+/**
+  Puts the scheduler in a `suspended` state. Scheduled tasks will be queued until the
+  scheduler is released.
+**/
+function suspend() {
+  semaphore++;
+}
+
+/**
+  Releases the current lock. Executes all queued tasks if the scheduler is in the released state.
+**/
+function flush() {
+  semaphore--;
+  if (!semaphore && queue.length) {
+    exec(queue.shift());
+  }
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/internal/utils.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.check = check;
+exports.hasOwn = hasOwn;
+exports.remove = remove;
+exports.deferred = deferred;
+exports.arrayOfDeffered = arrayOfDeffered;
+exports.delay = delay;
+exports.createMockTask = createMockTask;
+exports.autoInc = autoInc;
+exports.makeIterator = makeIterator;
+exports.log = log;
+exports.deprecate = deprecate;
+exports.wrapSagaDispatch = wrapSagaDispatch;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var sym = exports.sym = function sym(id) {
+  return '@@redux-saga/' + id;
+};
+var TASK = exports.TASK = sym('TASK');
+var HELPER = exports.HELPER = sym('HELPER');
+var MATCH = exports.MATCH = sym('MATCH');
+var CANCEL = exports.CANCEL = sym('cancelPromise');
+var SAGA_ACTION = exports.SAGA_ACTION = sym('SAGA_ACTION');
+var konst = exports.konst = function konst(v) {
+  return function () {
+    return v;
+  };
+};
+var kTrue = exports.kTrue = konst(true);
+var kFalse = exports.kFalse = konst(false);
+var noop = exports.noop = function noop() {};
+var ident = exports.ident = function ident(v) {
+  return v;
+};
+
+var isDev = exports.isDev = "development" === 'development';
+
+function check(value, predicate, error) {
+  if (!predicate(value)) {
+    log('error', 'uncaught at check', error);
+    throw new Error(error);
+  }
+}
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwn(object, property) {
+  return is.notUndef(object) && hasOwnProperty.call(object, property);
+}
+
+var is = exports.is = {
+  undef: function undef(v) {
+    return v === null || v === undefined;
+  },
+  notUndef: function notUndef(v) {
+    return v !== null && v !== undefined;
+  },
+  func: function func(f) {
+    return typeof f === 'function';
+  },
+  number: function number(n) {
+    return typeof n === 'number';
+  },
+  array: Array.isArray,
+  promise: function promise(p) {
+    return p && is.func(p.then);
+  },
+  iterator: function iterator(it) {
+    return it && is.func(it.next) && is.func(it.throw);
+  },
+  task: function task(t) {
+    return t && t[TASK];
+  },
+  observable: function observable(ob) {
+    return ob && is.func(ob.subscribe);
+  },
+  buffer: function buffer(buf) {
+    return buf && is.func(buf.isEmpty) && is.func(buf.take) && is.func(buf.put);
+  },
+  pattern: function pattern(pat) {
+    return pat && (typeof pat === 'string' || (typeof pat === 'undefined' ? 'undefined' : _typeof(pat)) === 'symbol' || is.func(pat) || is.array(pat));
+  },
+  channel: function channel(ch) {
+    return ch && is.func(ch.take) && is.func(ch.close);
+  },
+  helper: function helper(it) {
+    return it && it[HELPER];
+  },
+  stringableFunc: function stringableFunc(f) {
+    return is.func(f) && hasOwn(f, 'toString');
+  }
+};
+
+function remove(array, item) {
+  var index = array.indexOf(item);
+  if (index >= 0) {
+    array.splice(index, 1);
+  }
+}
+
+function deferred() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var def = _extends({}, props);
+  var promise = new Promise(function (resolve, reject) {
+    def.resolve = resolve;
+    def.reject = reject;
+  });
+  def.promise = promise;
+  return def;
+}
+
+function arrayOfDeffered(length) {
+  var arr = [];
+  for (var i = 0; i < length; i++) {
+    arr.push(deferred());
+  }
+  return arr;
+}
+
+function delay(ms) {
+  var val = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  var timeoutId = void 0;
+  var promise = new Promise(function (resolve) {
+    timeoutId = setTimeout(function () {
+      return resolve(val);
+    }, ms);
+  });
+
+  promise[CANCEL] = function () {
+    return clearTimeout(timeoutId);
+  };
+
+  return promise;
+}
+
+function createMockTask() {
+  var _ref;
+
+  var running = true;
+  var _result = void 0,
+      _error = void 0;
+
+  return _ref = {}, _defineProperty(_ref, TASK, true), _defineProperty(_ref, 'isRunning', function isRunning() {
+    return running;
+  }), _defineProperty(_ref, 'result', function result() {
+    return _result;
+  }), _defineProperty(_ref, 'error', function error() {
+    return _error;
+  }), _defineProperty(_ref, 'setRunning', function setRunning(b) {
+    return running = b;
+  }), _defineProperty(_ref, 'setResult', function setResult(r) {
+    return _result = r;
+  }), _defineProperty(_ref, 'setError', function setError(e) {
+    return _error = e;
+  }), _ref;
+}
+
+function autoInc() {
+  var seed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+  return function () {
+    return ++seed;
+  };
+}
+
+var uid = exports.uid = autoInc();
+
+var kThrow = function kThrow(err) {
+  throw err;
+};
+var kReturn = function kReturn(value) {
+  return { value: value, done: true };
+};
+function makeIterator(next) {
+  var thro = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : kThrow;
+  var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var isHelper = arguments[3];
+
+  var iterator = { name: name, next: next, throw: thro, return: kReturn };
+
+  if (isHelper) {
+    iterator[HELPER] = true;
+  }
+  if (typeof Symbol !== 'undefined') {
+    iterator[Symbol.iterator] = function () {
+      return iterator;
+    };
+  }
+  return iterator;
+}
+
+/**
+  Print error in a useful way whether in a browser environment
+  (with expandable error stack traces), or in a node.js environment
+  (text-only log output)
+ **/
+function log(level, message) {
+  var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+  /*eslint-disable no-console*/
+  if (typeof window === 'undefined') {
+    console.log('redux-saga ' + level + ': ' + message + '\n' + (error && error.stack || error));
+  } else {
+    console[level](message, error);
+  }
+}
+
+function deprecate(fn, deprecationWarning) {
+  return function () {
+    if (isDev) log('warn', deprecationWarning);
+    return fn.apply(undefined, arguments);
+  };
+}
+
+var internalErr = exports.internalErr = function internalErr(err) {
+  return new Error('\n  redux-saga: Error checking hooks detected an inconsistent state. This is likely a bug\n  in redux-saga code and not yours. Thanks for reporting this in the project\'s github repo.\n  Error: ' + err + '\n');
+};
+
+function wrapSagaDispatch(dispatch) {
+  return function sagaDispatch(action) {
+    var wrappedAction = Object.defineProperty(action, SAGA_ACTION, { value: true });
+    return dispatch(wrappedAction);
+  };
+}
+
+/***/ }),
+
+/***/ "../node_modules/redux-saga/lib/utils.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = __webpack_require__("../node_modules/redux-saga/lib/internal/utils.js");
+
+Object.defineProperty(exports, 'TASK', {
+  enumerable: true,
+  get: function get() {
+    return _utils.TASK;
+  }
+});
+Object.defineProperty(exports, 'SAGA_ACTION', {
+  enumerable: true,
+  get: function get() {
+    return _utils.SAGA_ACTION;
+  }
+});
+Object.defineProperty(exports, 'noop', {
+  enumerable: true,
+  get: function get() {
+    return _utils.noop;
+  }
+});
+Object.defineProperty(exports, 'is', {
+  enumerable: true,
+  get: function get() {
+    return _utils.is;
+  }
+});
+Object.defineProperty(exports, 'deferred', {
+  enumerable: true,
+  get: function get() {
+    return _utils.deferred;
+  }
+});
+Object.defineProperty(exports, 'arrayOfDeffered', {
+  enumerable: true,
+  get: function get() {
+    return _utils.arrayOfDeffered;
+  }
+});
+Object.defineProperty(exports, 'createMockTask', {
+  enumerable: true,
+  get: function get() {
+    return _utils.createMockTask;
+  }
+});
+
+var _io = __webpack_require__("../node_modules/redux-saga/lib/internal/io.js");
+
+Object.defineProperty(exports, 'asEffect', {
+  enumerable: true,
+  get: function get() {
+    return _io.asEffect;
+  }
+});
+
+var _proc = __webpack_require__("../node_modules/redux-saga/lib/internal/proc.js");
+
+Object.defineProperty(exports, 'CHANNEL_END', {
+  enumerable: true,
+  get: function get() {
+    return _proc.CHANNEL_END;
+  }
+});
+
+/***/ }),
+
+/***/ "./configureStore.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const redux_1 = __webpack_require__("../node_modules/redux/es/index.js");
+const redux_thunk_1 = __webpack_require__("../node_modules/redux-thunk/lib/index.js");
+const redux_saga_1 = __webpack_require__("../node_modules/redux-saga/lib/index.js");
+const polls_1 = __webpack_require__("./features/polls/index.ts");
+function configureStore(api) {
+    const sagaMiddleware = redux_saga_1.default();
+    const extraArguments = { api };
+    const middlewares = [
+        sagaMiddleware,
+        redux_thunk_1.default.withExtraArgument(extraArguments),
+    ];
+    const reducer = redux_1.combineReducers({
+        polls: polls_1.reducer,
+    });
+    const store = redux_1.createStore(reducer, redux_1.compose(redux_1.applyMiddleware(...middlewares), ('development' === "development" && window.devToolsExtension)
+        ? window.devToolsExtension() : ((arg) => arg)));
+    return {
+        store,
+        runSaga: sagaMiddleware.run,
+    };
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = configureStore;
+
+
+/***/ }),
+
+/***/ "./createReactApp.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const React = __webpack_require__("../node_modules/react/react.js");
+const ReactDOM = __webpack_require__("../node_modules/react-dom/index.js");
+const react_redux_1 = __webpack_require__("../node_modules/react-redux/lib/index.js");
+const configureStore_1 = __webpack_require__("./configureStore.ts");
+const App_1 = __webpack_require__("./modules/App/index.ts");
+const Api_1 = __webpack_require__("./shared/api/Api.ts");
+class ReactApp {
+    constructor() {
+        const api = new Api_1.default('/api');
+        const { store, runSaga } = configureStore_1.default(api);
+        this.store = store;
+        this.rootComponent = (React.createElement(react_redux_1.Provider, { store: store },
+            React.createElement(App_1.App, null)));
+    }
+    render() {
+        ReactDOM.render(this.rootComponent, document.getElementById('root'));
+    }
+    passFormDataInStore(jsonParseConfig) {
+        this.store.dispatch({ type: 'POLLS:LOAD_INITIAL_FORM_DATA', payload: jsonParseConfig });
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ReactApp;
+
+
+/***/ }),
+
+/***/ "./features/polls/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const Polls_1 = __webpack_require__("./features/polls/view/Polls/Polls.tsx");
+exports.Polls = Polls_1.default;
+const redux_1 = __webpack_require__("./features/polls/redux/index.ts");
+exports.reducer = redux_1.reducer;
+exports.actions = redux_1.actions;
+exports.initialState = redux_1.initial;
+const Namespace = __webpack_require__("./features/polls/namespace.ts");
+exports.Namespace = Namespace;
+
+
+/***/ }),
+
+/***/ "./features/polls/namespace.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+/***/ }),
+
+/***/ "./features/polls/redux/actions/communication.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function changeFormField(fieldName, fieldValue) {
+    return { type: 'POLLS:CHANGE_FORM_FIELD', payload: { fieldName, fieldValue } };
+}
+exports.changeFormField = changeFormField;
+
+
+/***/ }),
+
+/***/ "./features/polls/redux/actions/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const communication_1 = __webpack_require__("./features/polls/redux/actions/communication.ts");
+const actions = {
+    changeFormField: communication_1.changeFormField,
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = actions;
+
+
+/***/ }),
+
+/***/ "./features/polls/redux/data/initial.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const initialState = {
+    initialFormData: {},
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = initialState;
+
+
+/***/ }),
+
+/***/ "./features/polls/redux/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const reducers_1 = __webpack_require__("./features/polls/redux/reducers/index.ts");
+exports.reducer = reducers_1.default;
+const actions_1 = __webpack_require__("./features/polls/redux/actions/index.ts");
+exports.actions = actions_1.default;
+const initial_1 = __webpack_require__("./features/polls/redux/data/initial.ts");
+exports.initial = initial_1.default;
+
+
+/***/ }),
+
+/***/ "./features/polls/redux/reducers/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const initial_1 = __webpack_require__("./features/polls/redux/data/initial.ts");
+const immutable_1 = __webpack_require__("../node_modules/immutable/dist/immutable.js");
+function reducer(state = initial_1.default, { type, payload }) {
+    const imState = immutable_1.fromJS(state);
+    switch (type) {
+        case 'POLLS:LOAD_INITIAL_FORM_DATA':
+            return imState.set('initialFormData', payload).toJS();
+        case 'POLLS:CHANGE_FORM_FIELD': {
+            const { fieldName, fieldValue } = payload;
+            return imState
+                .setIn(['formData', [fieldName]], fieldValue)
+                .toJS();
+        }
+        default:
+            return state;
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = reducer;
+
+
+/***/ }),
+
+/***/ "./features/polls/view/Polls/Polls.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const React = __webpack_require__("../node_modules/react/react.js");
+const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const react_redux_1 = __webpack_require__("../node_modules/react-redux/lib/index.js");
+const redux_1 = __webpack_require__("../node_modules/redux/es/index.js");
+const Tabs_1 = __webpack_require__("./shared/view/components/Tabs/index.ts");
+const typesFormsFields_1 = __webpack_require__("./typesFormsFields.ts");
+const MultipleAnswerCard_1 = __webpack_require__("./features/polls/view/components/MultipleAnswerCard/index.tsx");
+const SingleAnswerCard_1 = __webpack_require__("./features/polls/view/components/SingleAnswerCard/index.tsx");
+const redux_2 = __webpack_require__("./features/polls/redux/index.ts");
+function mapStateToProps(state) {
+    const { initialFormData } = state.polls;
+    return {
+        initialFormData,
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return redux_1.bindActionCreators({
+        changeFormField: redux_2.actions.changeFormField,
+    }, dispatch);
+}
+class Polls extends React.Component {
+    render() {
+        const b = block('polls');
+        const { initialFormData } = this.props;
+        return (React.createElement(Tabs_1.Tabs, { activeKey: initialFormData.typeForm },
+            React.createElement(Tabs_1.Tab, { eventKey: typesFormsFields_1.typesForms.sa1 },
+                React.createElement(SingleAnswerCard_1.default, { initialData: initialFormData })),
+            React.createElement(Tabs_1.Tab, { eventKey: typesFormsFields_1.typesForms.ma1 },
+                React.createElement(MultipleAnswerCard_1.default, { initialData: initialFormData }))));
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Polls);
+
+
+/***/ }),
+
+/***/ "./features/polls/view/components/MultipleAnswerCard/index.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const React = __webpack_require__("../node_modules/react/react.js");
+const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const components_1 = __webpack_require__("./shared/view/components/index.ts");
+const elements_1 = __webpack_require__("./shared/view/elements/index.ts");
+__webpack_require__("./features/polls/view/components/MultipleAnswerCard/style.styl");
+class MultipleAnswerCard extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.b = block('multiple-answer-card');
+    }
+    render() {
+        const b = this.b;
+        const { initialData } = this.props;
+        return (React.createElement(components_1.Card, { initialData: initialData },
+            React.createElement(elements_1.CheckboxGroup, { checkboxInputs: initialData.checkboxInputs })));
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = MultipleAnswerCard;
+
+
+/***/ }),
+
+/***/ "./features/polls/view/components/MultipleAnswerCard/style.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./features/polls/view/components/MultipleAnswerCard/style.styl");
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/style-loader/addStyles.js")(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(true) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./features/polls/view/components/MultipleAnswerCard/style.styl", function() {
+			var newContent = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./features/polls/view/components/MultipleAnswerCard/style.styl");
+			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./features/polls/view/components/SingleAnswerCard/index.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const React = __webpack_require__("../node_modules/react/react.js");
+const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const components_1 = __webpack_require__("./shared/view/components/index.ts");
+const elements_1 = __webpack_require__("./shared/view/elements/index.ts");
+class SingleAnswerCard extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.b = block('single-answer-card');
+    }
+    render() {
+        const b = this.b;
+        const { initialData } = this.props;
+        return (React.createElement(components_1.Card, { initialData: initialData },
+            React.createElement(elements_1.RadioGroup, { radioInputs: initialData.radioInputs })));
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = SingleAnswerCard;
+
+
+/***/ }),
+
+/***/ "./index.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const DomParser_1 = __webpack_require__("./shared/helpers/DomParser.ts");
+const createReactApp_1 = __webpack_require__("./createReactApp.tsx");
+const injectTapEventPlugin = __webpack_require__("../node_modules/react-tap-event-plugin/src/injectTapEventPlugin.js");
+injectTapEventPlugin();
+document.addEventListener('DOMContentLoaded', () => {
+    const parser = new DomParser_1.DomParser();
+    const htmlParseData = parser.parseFormData();
+    const app = new createReactApp_1.default();
+    const question = htmlParseData && htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint');
+    if (question && (question.value === 'sa1' || question.value === 'MA1')) {
+        const form = document.getElementById('mrForm');
+        if (form) {
+            form.style.display = 'none';
+            const div = document.createElement('div');
+            div.setAttribute('id', 'root');
+            document.body.appendChild(div);
+            app.passFormDataInStore(htmlParseData);
+            app.render();
+        }
+    }
+});
+
+
+/***/ }),
+
+/***/ "./modules/App/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var App_1 = __webpack_require__("./modules/App/view/App.tsx");
+exports.App = App_1.default;
+
+
+/***/ }),
+
+/***/ "./modules/App/view/App.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const React = __webpack_require__("../node_modules/react/react.js");
+const block = __webpack_require__("../node_modules/bem-cn/dist/bem-cn.js");
+const react_redux_1 = __webpack_require__("../node_modules/react-redux/lib/index.js");
+const Footer_1 = __webpack_require__("./shared/view/components/Footer/index.tsx");
+const Header_1 = __webpack_require__("./shared/view/components/Header/index.tsx");
+const Polls_1 = __webpack_require__("./features/polls/view/Polls/Polls.tsx");
+__webpack_require__("./shared/view/styles/base.styl");
+__webpack_require__("./shared/view/styles/fonts/index.ts");
+__webpack_require__("./modules/App/view/styles.styl");
+function mapStateToProps(state) {
+    const { initialFormData: { logo, progress } } = state.polls;
+    return {
+        logo,
+        progress,
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+class App extends React.Component {
+    render() {
+        const b = block('application');
+        const { logo, progress } = this.props;
+        return (React.createElement("div", { className: b() },
+            React.createElement("div", { className: b('body') },
+                React.createElement(Header_1.default, { logo: logo, progress: progress }),
+                React.createElement(Polls_1.default, null),
+                React.createElement(Footer_1.default, null))));
+    }
+}
+exports.App = App;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+/***/ }),
+
+/***/ "./modules/App/view/styles.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./modules/App/view/styles.styl");
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/style-loader/addStyles.js")(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(true) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./modules/App/view/styles.styl", function() {
+			var newContent = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./modules/App/view/styles.styl");
+			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./shared/view/styles/base.styl":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/styles/base.styl");
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/style-loader/addStyles.js")(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(true) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/styles/base.styl", function() {
+			var newContent = __webpack_require__("../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[local]!../node_modules/autoprefixer-loader/index.js?browsers=last 2 version!../node_modules/stylus-loader/index.js!./shared/view/styles/base.styl");
+			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ })
+
+},["./index.tsx"]);
