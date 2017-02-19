@@ -2,53 +2,143 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-</head>
+<link href="/css/shared.css" rel="stylesheet"><link href="/css/app.css" rel="stylesheet"></head>
 <body>
-    <form name="mrForm" style="display: none" id="mrForm" action="/mrIWeb/mrIWeb.dll" method="post"><input type="hidden" name="I.Engine" value="engine2"><input type="hidden" name="I.Project" value="S2011965"><input type="hidden" name="I.Session" value="xpm6k2vlokaebgtgbgzzoitnmy1aaaaa"><input type="hidden" name="I.SavePoint" value="sa1"><input type="hidden" name="I.Renderer" value="HTMLPlayer">
-        <span style="font-family: Arial; font-size: .92em;;">
-            <div></div>
-            <span class="mrBannerText" style="">
-                <span class="header2" style="font-size:large;">ЭТО ТЕСТОВАЯ АНКЕТА</span>
-            </span>
-            <br>
-            <span style="font-size: .83em;">
-                <div></div>
-                <span class="mrQuestionText" style="">SA1. Здравствуйте! Этот опрос подготовлен независимой социологической компанией Ипсос. Мы проводим опросы населения на различные темы. Будем очень благодарны, если Вы уделите немного своего времени и ответите на наши вопросы. <br>Все Ваши ответы, так же как и ответы других участников этого исследования, <u>будут использоваться в обобщенной форме и только после статистической обработки.  </u><br>Заранее спасибо за Ваше участие в опросе!<br><br>Пожалуйста, нажмите “Далее”, чтобы начать отвечать на вопросы.<br>
-                    <font color="Red" class="instr">/ОДИН ОТВЕТ/</font>
-                </span>
-                <div><br></div>
-                <div></div>
-                <span style="">
-                    <span class="mrQuestionTable" style="display:block;margin-left: 1em;">
-                        <span id="Cell.0.0" style="">
-                            <div></div>
-                            <input type="radio" name="_Qsa1_C" id="_Q0_C0" class="mrSingle" style="margin-left: 1em;" value="__1">
-                                <label for="_Q0_C0">
-                                    <span class="mrSingleText" style="">1. Согласен(-а)</span>
-                                </label>
+    <form name="mrForm" id="mrForm" action="/mrIWeb/mrIWeb.dll" method="post"><input type="hidden" name="I.Engine" value="engine7"><input type="hidden" name="I.Project" value="S2012060"><input type="hidden" name="I.Session" value="rg12ciciegwubggcconasovajy3qaaaa"><input type="hidden" name="I.SavePoint" value="MA1"><input type="hidden" name="I.Renderer" value="HTMLPlayer"><div id="container">
+				<div id="HeaderBox">
+					<table border="0" width="100%" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td align="center">
+								<img src="http://survey.ipsos.ru/qst/dp/_logo/logo.gif" align="left" border="0" width="40">
+							</td>
+							<td align="right">
+								<!--<div style="height:15px; text-align:right; font-weight:bold; border: 1px #534691 ridge" >
+						<mrProgressBar Color="#15A9AF" ShowCounts="AsPercentage" width="100px"/>
+					</div>-->
+								<div style="height:20px;width:250px;border-width:1px;border-style:solid; font-size:xx-small">
+									<table style="height: 100%; width: 100%"><tbody><tr><td style="width: 10%; background-color: #107FBA"></td><td class="mrProgressText">10%</td></tr></tbody></table></div>
+							</td>
+						</tr>
+					</tbody></table>
+					<div id="headerBg"></div>
+				</div>
+				<div class="page" id="SurroundContents">
+					<div class="question select" id="SurveyContents">
+						<br>
+						<div></div>
+						<span class="mrQuestionText" style="">MA1. Для нашего опроса мы ищем людей определённых профессий. Скажите, работаете ли Вы или кто-либо из членов вашей семьи в какой-либо из перечисленных областей?<br>
+							<font color="Red" class="instr">/ВОЗМОЖНО НЕСКОЛЬКО ОТВЕТОВ/</font></span>
+						<div><br></div>
+						<div></div>
+						<span style="">
+							<span class="mrQuestionTable" style="display:block;margin-left: 1em;">
+								<span id="Cell.0.0" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__1" id="_Q0_C0" class="mrMultiple" style="margin-left: 1em;" value="__1">
+										<label for="_Q0_C0">
+											<span class="mrMultipleText" style="">1. Банковское дело</span>
+										</label>
 
-                        </span>
-                        <span id="Cell.0.1" style="">
-                            <div></div>
-                            <input type="radio" name="_Qsa1_C" id="_Q0_C1" class="mrSingle" style="margin-left: 1em;" value="__2">
-                                <label for="_Q0_C1">
-                                    <span class="mrSingleText" style="">2. Не согласен(-а)</span>
-                                </label>
+								</span>
+								<span id="Cell.0.1" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__2" id="_Q0_C1" class="mrMultiple" style="margin-left: 1em;" value="__2">
+										<label for="_Q0_C1">
+											<span class="mrMultipleText" style="">2. Строительство </span>
+										</label>
 
-                        </span>
-                    </span>
-                </span>
-                <div><br></div>
-                <div><br></div>
-                <span style="float:left;">
-                    <span style="direction:rtl;float:left;margin-right:10px;">
-                        <input type="submit" name="_NNext" class="mrNext" style="width: 70px;" value="Следующий" alt="Следующий">
-                        <input type="submit" name="_NPrev" class="mrPrev" style="width: 70px;" value="Предыдущий" alt="Предыдущий">
-                    </span>
-                    <input type="submit" name="_NStop" class="mrStop" style="width: 70px;" value="Стоп" alt="Стоп">
-                </span>
-            </span>
-        </span>
-    </form>
+								</span>
+								<span id="Cell.0.2" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__3" id="_Q0_C2" class="mrMultiple" style="margin-left: 1em;" value="__3">
+										<label for="_Q0_C2">
+											<span class="mrMultipleText" style="">3. Маркетинговые исследования</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.3" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__4" id="_Q0_C3" class="mrMultiple" style="margin-left: 1em;" value="__4">
+										<label for="_Q0_C3">
+											<span class="mrMultipleText" style="">4. Маркетинг</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.4" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__5" id="_Q0_C4" class="mrMultiple" style="margin-left: 1em;" value="__5">
+										<label for="_Q0_C4">
+											<span class="mrMultipleText" style="">5. Производство, распространение, продажа напитков и продуктов питания</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.5" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__6" id="_Q0_C5" class="mrMultiple" style="margin-left: 1em;" value="__6">
+										<label for="_Q0_C5">
+											<span class="mrMultipleText" style="">6. Связи с общественностью</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.6" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__7" id="_Q0_C6" class="mrMultiple" style="margin-left: 1em;" value="__7">
+										<label for="_Q0_C6">
+											<span class="mrMultipleText" style="">7. Отели, рестораны, бары</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.7" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__8" id="_Q0_C7" class="mrMultiple" style="margin-left: 1em;" value="__8">
+										<label for="_Q0_C7">
+											<span class="mrMultipleText" style="">8. Страхование</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.8" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__9" id="_Q0_C8" class="mrMultiple" style="margin-left: 1em;" value="__9">
+										<label for="_Q0_C8">
+											<span class="mrMultipleText" style="">9. Тяжелая промышленность</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.9" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__10" id="_Q0_C9" class="mrMultiple" style="margin-left: 1em;" value="__10">
+										<label for="_Q0_C9">
+											<span class="mrMultipleText" style="">10. Другое</span>
+										</label>
+
+								</span>
+								<span id="Cell.0.10" style="">
+									<div></div>
+									<input type="checkbox" name="_QMA1_C__excl11" id="_Q0_C10" class="mrMultiple" style="margin-left: 1em;" value="__excl11">
+										<label for="_Q0_C10">
+											<span class="mrMultipleText" style=""><span style="color:#333;">11. Ничего из перечисленного </span></span>
+										</label>
+
+								</span>
+							</span>
+						</span>
+						<div><br></div>
+						<br>
+						<div class="banner"><div></div>
+							<span class="mrBannerText" style=""><span class="header2" style="font-size:large;">ЭТО ТЕСТОВАЯ АНКЕТА</span></span>
+							<br>
+						</div>
+						<br>
+						<br>
+					</div>
+					<div id="footerholder" class="footerholder_desktop">
+						<div class="submit_div" id="buttons">
+							<input type="submit" name="_NPrev" class="mrPrev" style="width: 70px;" value="Назад" alt="Назад">
+							<input type="submit" name="_NNext" class="mrNext" style="width: 70px;" value="Далее" alt="Далее">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 <script type="text/javascript" src="/js/vendor.bundle.js"></script><script type="text/javascript" src="/js/shared.bundle.js"></script><script type="text/javascript" src="/js/app.bundle.js"></script></body>
 </html>

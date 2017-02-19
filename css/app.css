@@ -1,3 +1,23 @@
+.multiple-answer-card {
+  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);
+  background-color: #fff;
+  border-radius: 2px;
+}
+.multiple-answer-card__content {
+  padding: 65px;
+}
+.multiple-answer-card__text {
+  font-size: 1.42rem;
+  padding: 0 10px;
+  color: rgba(0,0,0,0.87);
+}
+.multiple-answer-card__button-control {
+  text-align: center;
+  padding-top: 36px;
+}
+.multiple-answer-card__options {
+  padding-top: 30px;
+}
 html {
   font-size: 14px;
   color: #272727;
@@ -8,6 +28,7 @@ body {
   font-size: 1rem;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 a {
   color: #272727;
@@ -33,7 +54,7 @@ body,
 }
 .application {
   min-height: 100%;
-  background-color: #ececec;
+  background-color: #dedede;
 }
 .application__body {
   max-width: 1600px;
