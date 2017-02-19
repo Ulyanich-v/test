@@ -2668,7 +2668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlParseData = parser.parseFormData();
     const app = new createReactApp_1.default();
     const question = htmlParseData && htmlParseData.hiddenInputs.find(item => item.name === 'I.SavePoint');
-    if (question && (question.value === 'sa1' || question.value === 'MA1')) {
+    if (question && (question.value.includes('sa') || question.value.includes('MA'))) {
         const form = document.getElementById('mrForm');
         if (form) {
             form.style.display = 'none';
