@@ -10579,14 +10579,21 @@ class DomParser {
     parseFormData() {
         const typeForm = $(typesFormsFields_1.typesFields.typeForm).val();
         this.setCommonFields();
-        switch (typeForm) {
-            case typesFormsFields_1.typesForms.sa1:
-                return this.parseSA1Form();
-            case typesFormsFields_1.typesForms.ma1:
-                return this.parseMA1Form();
-            default:
-                return null;
+        if (typesFormsFields_1.typesForms.sa1.includes(typeForm.substr(0, 2))) {
+            return this.parseSA1Form();
         }
+        if (typesFormsFields_1.typesForms.ma1.includes(typeForm.substr(0, 2))) {
+            return this.parseMA1Form();
+        }
+        return null;
+        // switch (typeForm) {
+        // case typesForms.sa1.includes:
+        //   return this.parseSA1Form();
+        // case typesForms.ma1:
+        //   return this.parseMA1Form();
+        // default:
+        //   return null;
+        // }
     }
     parseSA1Form() {
         const $questionTable = $(typesFormsFields_1.typesFields.questionTable);
