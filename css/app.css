@@ -51,6 +51,8 @@ body,
   font-family: SegoeUI;
   font-style: normal;
   src: url(/fonts/6581cfaeee8057734a3f16d37719bfb2.ttf);
+  src: url(/fonts/3b1b8cc3b81b5496bb98a1102dbcea2d.eot);
+  src: url(/fonts/890e7212643c25ad929d75fdc18e293c.woff);
 }
 .application {
   min-height: 100%;
