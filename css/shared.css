@@ -1,0 +1,167 @@
+.button {
+  margin: 0 7px;
+  padding: 0 24px;
+  font-size: 1rem;
+  line-height: 2.57rem;
+  height: 2.57rem;
+  background-color: #f0f0f0;
+  color: rgba(0,0,0,0.7);
+}
+.primary {
+  background-color: #15a9af;
+  color: #fff;
+}
+.primary:not([disabled]).flat {
+  color: #fff;
+}
+.primary:not([disabled]).flat:hover {
+  background-color: #44babf;
+}
+.neutral:not([disabled]).flat {
+  color: rgba(0,0,0,0.7);
+}
+.neutral:not([disabled]).flat:hover {
+  background-color: #f3f3f3;
+}
+.raised,
+.flat,
+.floating,
+.toggle {
+  font-family: 'SegoeUI', sans-serif;
+}
+.checkbox-button:hover {
+  background-color: rgba(21,169,175,0.08);
+}
+.checkbox-button_active {
+  background-color: rgba(21,169,175,0.16);
+  transition-property: background-color;
+  transition-duration: 0.4s;
+}
+.checkbox-button_active:hover {
+  background-color: rgba(21,169,175,0.16);
+}
+.check {
+  width: 18px;
+  height: 18px;
+  border-color: rgba(0,0,0,0.54);
+  box-sizing: border-box;
+}
+.check.checked {
+  background-color: inherit;
+  border: none;
+}
+.check.checked:after {
+  border-color: #15a9af;
+  width: 18px;
+  height: 14px;
+}
+.text {
+  font-size: 1.14rem;
+  color: rgba(0,0,0,0.87);
+  padding-left: 10px;
+  line-height: 24px;
+}
+.progress-bar__title {
+  font-size: 0.929rem;
+  line-height: 1rem;
+  margin-right: 12px;
+  color: rgba(0,0,0,0.7);
+  vertical-align: top;
+}
+.linear {
+  width: 324px;
+  height: 13px;
+  border-radius: 2px 0 0 2px;
+  background: #f0f0f0;
+}
+.buffer {
+  background: linear-gradient(to left, #534691 0%, #15a9af 100%);
+}
+.radio-button:hover {
+  background-color: rgba(21,169,175,0.08);
+}
+.radio-button_active {
+  background-color: rgba(21,169,175,0.16);
+  transition-property: background-color;
+  transition-duration: 0.4s;
+}
+.radio-button_active:hover {
+  background-color: rgba(21,169,175,0.16);
+}
+.text {
+  font-size: 1.14rem;
+  color: rgba(0,0,0,0.87);
+  padding-left: 10px;
+  line-height: 24px;
+}
+.radio,
+.radioChecked {
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+}
+.radio {
+  border: solid 2px rgba(0,0,0,0.54);
+  box-sizing: border-box;
+}
+.radioChecked {
+  border: 2px solid #15a9af;
+  box-sizing: border-box;
+}
+.radioChecked:before {
+  background-color: #15a9af;
+}
+.field,
+.disabled {
+  padding: 0.95rem 10px;
+  height: 18px;
+  margin: 0;
+}
+.radio:before,
+.radioChecked:before {
+  background-color: #15a9af;
+}
+.card {
+  box-shadow: 2px 3px 5px 1px rgba(0,0,0,0.24);
+  background-color: #fff;
+  border-radius: 2px;
+}
+.card__content {
+  padding: 65px;
+}
+.card__text {
+  font-size: 1.42rem;
+  padding: 0 10px;
+  color: rgba(0,0,0,0.87);
+}
+.card__button-control {
+  text-align: center;
+  padding-top: 36px;
+}
+.card__options {
+  padding-top: 30px;
+}
+.footer {
+  padding-top: 70px;
+  color: rgba(0,0,0,0.7);
+}
+.footer__description {
+  text-align: center;
+}
+.footer__copyright {
+  padding-top: 15px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.head__progress-bar {
+  padding-top: 40px;
+  float: right;
+}
+.head__logo-img {
+  display: inline-block;
+  padding-top: 20px;
+}
+.head__logo-img img {
+  width: 67px;
+  height: 60px;
+}
